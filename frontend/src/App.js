@@ -8,7 +8,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import "react-notifications-component/dist/theme.css";
-import ReactNotification from "react-notifications-component";
+import { ReactNotifications } from "react-notifications-component";
 import { store } from "react-notifications-component";
 
 //Import css
@@ -179,7 +179,7 @@ class App extends React.Component {
             this.state.settings.dark_light === 0 ? "app-light" : "app-dark"
           }
         >
-          <ReactNotification />
+          <ReactNotifications />
           <Router basename={basename}>
             <Header dark_light={this.state.settings.dark_light} />
 
