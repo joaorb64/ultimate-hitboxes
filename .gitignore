@@ -20,3 +20,4 @@ frontend/public/series-symbol
 dbtest
 compose-dev.yml
 compose-prod.yml
+.idea/
