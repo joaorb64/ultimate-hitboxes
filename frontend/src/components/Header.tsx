@@ -1,4 +1,4 @@
-//Import React Elements
+//React Imports
 import * as React from "react"
 import { useHistory } from "react-router-dom";
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
@@ -8,23 +8,10 @@ import '../css/Header.css';
 
 //Import Media
 import twitter from '../media/twitter.png'
-import discord from '../media/discord.png'
 
 import github_dark from '../media/darkmode/github.png'
 import github_light from '../media/lightmode/github.png'
 const github = [github_dark, github_light]
-
-import settings_dark from '../media/darkmode/settings.png'
-import settings_light from '../media/lightmode/settings.png'
-const settings = [settings_dark, settings_light]
-
-import info_dark from '../media/darkmode/info.png'
-import info_light from '../media/lightmode/info.png'
-const info = [info_dark, info_light]
-
-import back_dark from '../media/darkmode/back.png'
-import back_light from '../media/lightmode/back.png'
-const back = [back_dark, back_light]
 
 function Header(props) {
   let history = useHistory();
@@ -38,14 +25,14 @@ function Header(props) {
     <div id="header">
       <div id="help">
         <Link to="/info">
-          <img id="infoButton" className="helpButtons" src={info[props.dark_light]}/>
+          <span id="infoButton" className="material-symbols-rounded helpButtons">info</span>
         </Link>
 
         <Link to="/settings">
-          <img id="settingsButton" className="helpButtons" src={settings[props.dark_light]}/>
+          <span id="settingsButton" className="material-symbols-rounded helpButtons">settings</span>
         </Link>
 
-        <img id="backButton" className="helpButtons" src={back[props.dark_light]} onClick={() => {history.goBack()}} />
+        <span id="backButton" className="material-symbols-rounded helpButtons" onClick={() => {history.goBack()}}>arrow_back</span>
 
       </div>
 
@@ -56,18 +43,15 @@ function Header(props) {
       </div>
 
       <div id="links">
-        <a href="https://twitter.com/SSBUHitboxes">
+        <a href="https://twitter.com/joao_shino">
           <img id="twitter" className="linkButtons" src={twitter}/>
         </a>
-        <a href="https://github.com/RSN-Bran/ultimate-hitboxes">
+        <a href="https://github.com/joaorb64/ultimate-hitboxes">
           <img id="github" className="linkButtons" src={github[props.dark_light]}/>
-        </a>
-        <a href="https://discord.gg/jZ9EKJpwde">
-          <img id="discord" className="linkButtons" src={discord} />
         </a>
       </div>
     </div>
-      
+
   )
 
 }

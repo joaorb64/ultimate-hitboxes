@@ -4,10 +4,6 @@ import * as React from "react"
 //CSS Imports
 import '../css/Player.css';
 
-import share_dark from '../media/darkmode/share.png'
-import share_light from '../media/lightmode/share.png'
-let share = [share_dark, share_light]
-
 //Component Imports
 import ToolTip from './ToolTip';
 
@@ -41,12 +37,12 @@ function Player(props) {
 					src={props.urls[props.currentFrame-1]}
 					alt="Move Frames go here"
 				/>
-				<img
+				<span
 					id="share"
-					src={share[props.settings.dark_light]}
+					className="material-symbols-rounded"
 					data-tip data-for="shareToolTip"
 					onClick={copyToClipboard}
-				/>
+				>share</span>
 				<ToolTip
 					id="shareToolTip"
 					text="Copy the link to this move"

@@ -2,12 +2,12 @@
 import * as React from "react";
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import ReactTooltip from "react-tooltip";
 
 //Component Imports
 import DataPortal from "./DataPortal";
 import Loading from "./Loading";
 import InvalidPage from "./InvalidPage";
+import MoveDropDown from "./MoveDropDown";
 import { getCharacterData, getMoveData } from "../data/staticData";
 
 //CSS Imports
@@ -25,23 +25,12 @@ function Main(props) {
   const [loading, setLoading] = useState(false);
   const [urls, setUrls] = useState([]);
 
-  //Variables to store the next and previous characters
-  let nextChar;
-  let prevChar;
-
   let characterIndex = 0;
   let characterKey;
 
   let jumpToFrame = function (frame) {
     setPlaying(false);
     setCurrentFrame(frame);
-  };
-
-  let newCharacter = function (character) {
-    setPlaying(false);
-    setMove(undefined);
-    setCharacter(character);
-    setCurrentFrame(1);
   };
 
   let newMove = function (move) {
@@ -67,30 +56,6 @@ function Main(props) {
     props.characterListData[characterIndex].completed === false
   ) {
     return <InvalidPage settings={props.settings} />;
-  }
-
-  let i = 1;
-  while (nextChar === undefined || prevChar === undefined) {
-    let nextIndex = (characterIndex + i) % props.characterListData.length;
-    let prevIndex = characterIndex - i;
-    if (prevIndex < 0) {
-      prevIndex = props.characterListData.length - Math.abs(prevIndex);
-    }
-
-    if (
-      props.characterListData[nextIndex].completed &&
-      nextChar === undefined
-    ) {
-      nextChar = props.characterListData[nextIndex];
-    }
-    if (
-      props.characterListData[prevIndex].completed &&
-      prevChar === undefined
-    ) {
-      prevChar = props.characterListData[prevIndex];
-    }
-
-    i = i + 1;
   }
 
   //Set up State variables
@@ -193,68 +158,26 @@ function Main(props) {
         setLoading={setLoading}
         currentMoveData={currentMoveData}
         setUrls={setUrls}
+        settings={props.settings}
       />
     );
   } else if (!loading && currentMoveData.value !== undefined) {
     return (
       <div>
         <div id="characterChoiceBar">
-          <Link to={`/${prevChar.value}`}>
-            <img
-              id="prevChar"
-              className="nextprevChar"
-              src={`https://ultimate-hitboxes.s3.amazonaws.com/icons/${prevChar.value}.png`}
-              onClick={() => {
-                newCharacter(prevChar.value);
-              }}
-              alt="Previous Character"
-              key={prevChar.value}
-              data-tip
-              data-for={prevChar.value}
-            />
-          </Link>
-          <ReactTooltip
-            key={prevChar.value}
-            id={prevChar.value}
-            place="top"
-            effect="solid"
-          >
-            {prevChar.name}
-          </ReactTooltip>
           <Link to="/characters">
-            <button
-              id="chooseCharacterButton"
-              className={
-                props.settings.dark_light === 0
-                  ? "chooseCharacter_dark"
-                  : "chooseCharacter_light"
-              }
-            >
-              <b>Choose a Character</b>
+            <button id="chooseCharacterButton">
+              <span className="material-symbols-rounded">arrow_back</span>
+              Back to Character Selection
             </button>
           </Link>
-          <Link to={`/${nextChar.value}`}>
-            <img
-              id="nextChar"
-              className="nextprevChar"
-              src={`https://ultimate-hitboxes.s3.amazonaws.com/icons/${nextChar.value}.png`}
-              onClick={() => {
-                newCharacter(nextChar.value);
-              }}
-              alt="Previous Character"
-              key={nextChar.value}
-              data-tip
-              data-for={nextChar.value}
-            />
-          </Link>
-          <ReactTooltip
-            key={nextChar.value}
-            id={nextChar.value}
-            place="top"
-            effect="solid"
-          >
-            {nextChar.name}
-          </ReactTooltip>
+          <h2 id="currentCharacterName">{currentCharacterData.name}</h2>
+          <MoveDropDown
+            currentCharacterData={currentCharacterData}
+            currentMoveData={currentMoveData}
+            settings={props.settings}
+            newMove={newMove}
+          />
         </div>
         <DataPortal
           settings={props.settings}

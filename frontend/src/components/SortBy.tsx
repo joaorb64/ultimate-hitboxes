@@ -8,16 +8,16 @@ import '../css/CharacterList.css';
 function SortBy(props) {
 
 	return (
-		<div>
-			<input type="radio" id="number" name="sort" value="number" onChange={() => { props.settings.sortBy = "number"; props.changeSettings(props.settings) }} checked={props.settings.sortBy === "number"} />
-			<label htmlFor="numberSort"><b>Sort by Number</b></label>
+		<div id="sortBy">
+			<span className="sortOption">
+				<input type="radio" id="number" name="sort" value="number" onChange={() => { props.settings.sortBy = "number"; props.changeSettings(props.settings) }} checked={props.settings.sortBy === "number"} />
+				<label htmlFor="number">Sort by Number</label>
+			</span>
 
-			<input type="radio" id="name" name="sort" value="name" onChange={() => { props.settings.sortBy = "name"; props.changeSettings(props.settings) }} checked={props.settings.sortBy === "name"} />
-			<label htmlFor="letterSort"><b>Sort by Name</b></label>
-
-			<input type="radio" id="name" name="sort" value="name" onChange={() => { props.settings.sortBy = "count"; props.changeSettings(props.settings) }} checked={props.settings.sortBy === "count"} />
-			<label htmlFor="popularSort"><b>Sort by Popularity</b></label>
-
+			<span className="sortOption">
+				<input type="radio" id="name" name="sort" value="name" onChange={() => { props.settings.sortBy = "name"; props.changeSettings(props.settings) }} checked={props.settings.sortBy === "name"} />
+				<label htmlFor="name">Sort by Name</label>
+			</span>
 		</div>
 	)
 }

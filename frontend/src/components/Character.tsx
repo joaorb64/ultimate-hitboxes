@@ -4,13 +4,14 @@ import { BrowserRouter as Router, Link } from 'react-router-dom'
 
 //CSS Imports
 import '../css/Character.css';
+import { assetBase } from '../data/assetBase';
 
 
 function Character(props) {
-	//Get the character artwork from the S3 bucket using the character's name
-	let renderURL = "https://ultimate-hitboxes.s3.amazonaws.com/characters/" + props.character.value + ".png"
-	//Get the symbol for the character's series from the S3 bucket using the series field in Character data
-	let seriesURL = "https://ultimate-hitboxes.s3.amazonaws.com/series-symbol/" + props.character.series + ".png"
+	//Get the character artwork from local assets using the character's name
+	let renderURL = `${assetBase}/characters/` + props.character.value + ".png"
+	//Get the symbol for the character's series from local assets using the series field in Character data
+	let seriesURL = `${assetBase}/series-symbol/` + props.character.series + ".png"
 
 	//Determines class the object should have
 	let dark_light = props.dark_light === 0 ? "dark" : "light"

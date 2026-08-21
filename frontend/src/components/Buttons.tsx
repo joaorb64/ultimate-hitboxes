@@ -9,40 +9,15 @@ import ToolTip from './ToolTip';
 //CSS Imports
 import '../css/Button.css';
 
-//Media Imports
-import minus_dark from '../media/darkmode/minus.png'
-import minus_light from '../media/lightmode/minus.png'
-let minus = [minus_dark, minus_light]
-
-import plus_dark from '../media/darkmode/plus.png'
-import plus_light from '../media/lightmode/plus.png'
-let plus = [plus_dark, plus_light]
-
-import play_dark from '../media/darkmode/play.png'
-import play_light from '../media/lightmode/play.png'
-let play = [play_dark, play_light]
-
-import pause_dark from '../media/darkmode/pause.png'
-import pause_light from '../media/lightmode/pause.png'
-let pause = [pause_dark, pause_light]
-
-import next_dark from '../media/darkmode/next.png'
-import next_light from '../media/lightmode/next.png'
-let next = [next_dark, next_light]
-
-import previous_dark from '../media/darkmode/previous.png'
-import previous_light from '../media/lightmode/previous.png'
-let previous = [previous_dark, previous_light]
-
 //Render 5 buttons for manipulating the video. Each button has a corresponding tool tip
 //Previous: Go the the previous move in the move list, not selectable if the video is currently playing or if there is no available previous move
 //Decrement: Move the video back by one frame, not selectable if the move if the video is currently playing or the move is on frame 1
-//Play/Pause: If the video is playing, shows a pause button to pause the video. If the video is puased, shows a play button to play the 
+//Play/Pause: If the video is playing, shows a pause button to pause the video. If the video is puased, shows a play button to play the
 //Increment: Move the video forward by one frame, not selectable if the move if the video is currently playing or the move is on its last frame
 //Next: Go the the next move in the move list, not selectable if the video is currently playing or if there is no available next move
 function Buttons(props) {
 
-	try { 
+	try {
 
 		//Establish the total number of frames the move has
 		let totalFrames = props.currentMoveData.frames
@@ -83,14 +58,12 @@ function Buttons(props) {
 			<div id="buttons">
 
 				<Link to={prevMove !== undefined ? `/${props.currentCharacterData.value}/${prevMove.value}` : null}>
-					<img
+					<span
 						data-tip data-for="previousToolTip"
-						className={index !== 0 ? "button" : "buttonNoClick"}
+						className={"material-symbols-rounded " + (index !== 0 ? "button" : "buttonNoClick")}
 						id="previous"
-						src={previous[props.settings.dark_light]}
 						onClick={() => { props.newMove(prevMove.value) }}
-						alt="Previous Move"
-					/>
+					>skip_previous</span>
 				</Link>
 				<ToolTip
 					id="previousToolTip"
@@ -98,14 +71,12 @@ function Buttons(props) {
 					render={index !== 0}
 				/>
 
-				<img
+				<span
 					data-tip data-for="minusToolTip"
-					className={props.currentFrame !== 1 && !props.playing ? "button" : "buttonNoClick"}
+					className={"material-symbols-rounded " + (props.currentFrame !== 1 && !props.playing ? "button" : "buttonNoClick")}
 					id="minus"
-					src={minus[props.settings.dark_light]}
 					onClick={() => { props.currentFrame !== 1 && !props.playing ? props.setCurrentFrame(props.currentFrame - 1) : null }}
-					alt="Decrement Frame"
-				/>
+				>chevron_left</span>
 
 				<ToolTip
 					id="minusToolTip"
@@ -113,28 +84,24 @@ function Buttons(props) {
 					render={props.currentFrame !== 1 && !props.playing}
 				/>
 
-				<img
+				<span
 					data-tip data-for="playToolTip"
-					className={totalFrames !== 1 ? "button" : "buttonNoClick"}
+					className={"material-symbols-rounded " + (totalFrames !== 1 ? "button" : "buttonNoClick")}
 					id="pause-play"
-					src={props.playing ? pause[props.settings.dark_light] : play[props.settings.dark_light]}
 					onClick={() => {props.setPlaying(!props.playing)}}
-					alt="Play Move"
-				/>
+				>{props.playing ? "pause" : "play_arrow"}</span>
 				<ToolTip
 					id="playToolTip"
 					text={props.playing ? "Pause the Move" : "Play the Move"}
 					render={totalFrames !== 1}
 				/>
 
-				<img
+				<span
 					data-tip data-for="plusToolTip"
-					className={props.currentFrame !== totalFrames && !props.playing ? "button" : "buttonNoClick"}
+					className={"material-symbols-rounded " + (props.currentFrame !== totalFrames && !props.playing ? "button" : "buttonNoClick")}
 					id="plus"
-					src={plus[props.settings.dark_light]}
 					onClick={() => { props.currentFrame !== totalFrames && !props.playing ? props.setCurrentFrame(props.currentFrame + 1) : null }}
-					alt="Increment Frame"
-				/>
+				>chevron_right</span>
 				<ToolTip
 					id="plusToolTip"
 					text="Go Forward 1 Frame"
@@ -142,14 +109,12 @@ function Buttons(props) {
 				/>
 
 				<Link to={nextMove !== undefined ? `/${props.currentCharacterData.value}/${nextMove.value}` : null}>
-					<img
+					<span
 						data-tip data-for="nextToolTip"
-						className={index !== props.currentCharacterData.moves.length - 1 ? "button" : "buttonNoClick"}
+						className={"material-symbols-rounded " + (index !== props.currentCharacterData.moves.length - 1 ? "button" : "buttonNoClick")}
 						id="next"
-						src={next[props.settings.dark_light]}
 						onClick={() => { props.newMove(nextMove.value) }}
-						alt="NextMove"
-					/>
+					>skip_next</span>
 				</Link>
 				<ToolTip
 					id="nextToolTip"
@@ -163,7 +128,7 @@ function Buttons(props) {
 	}
 	catch (err) {
 		return null
-		
+
 	}
 }
 

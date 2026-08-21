@@ -1,3 +1,21 @@
+#dataTable {
+	margin-bottom: 24px;
+	text-align: left;
+}
+
+#dataTable h5 {
+	font-size: .8em;
+	margin-bottom: 8px;
+	opacity: .8;
+}
+
+#hitboxTable {
+	border-radius: 10px;
+	overflow-x: auto;
+	overflow-y: hidden;
+	border: 1px solid rgba(127, 127, 127, 0.25);
+}
+
 @media (max-width: 400px) {
 	table, th, td {
 		font-size: .8em;
@@ -6,28 +24,41 @@
 
 .darkTable {
 	color: white;
-	border: 1px solid white;
 }
 
 .lightTable {
 	color: black;
-	border: 1px solid black;
 }
 
 .lightTableLightText {
 	color: white;
-	border: 1px solid black;
 }
 
 .darkTableDarkText {
 	color: black;
-	border: 1px solid white;
 }
 
 table, th, td {
 	border-collapse: collapse;
 	text-align: center;
-	margin: 0 auto;
+}
+
+table {
+	width: 100%;
+}
+
+th, td {
+	padding: 7px 10px;
+	border-bottom: 1px solid rgba(127, 127, 127, 0.2);
+	white-space: nowrap;
+}
+
+tbody tr:nth-child(even) {
+	background-color: rgba(127, 127, 127, 0.06);
+}
+
+tbody tr:hover {
+	background-color: rgba(99, 102, 241, 0.12);
 }
 
 span {
@@ -36,19 +67,22 @@ span {
 
 .tableheader {
 	cursor: help;
-}
-
-th {
-	background-color: gray;
+	font-weight: 600;
+	font-size: .85em;
+	text-transform: uppercase;
+	letter-spacing: .02em;
 }
 
 #moveNotes {
-	font-size: .6em;
+	font-size: .8em;
+	opacity: .7;
+	margin-top: 6px;
 }
 
 th {
+	background-color: rgba(127, 127, 127, 0.15);
 	position: -webkit-sticky;
 	position: sticky;
 	top: 0;
-
 }
+

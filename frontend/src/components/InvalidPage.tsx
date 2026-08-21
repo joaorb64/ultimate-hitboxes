@@ -7,11 +7,9 @@ function InvalidPage(props) {
         <div id="characterChoiceBar">
       <Link to="/characters">
 
-            <button
-              id="chooseCharacterButton"
-              className={props.settings.dark_light === 0 ? "chooseCharacter_dark" : "chooseCharacter_light"}
-            >
-              <b>Choose a Character</b>
+            <button id="chooseCharacterButton">
+              <span className="material-symbols-rounded">arrow_back</span>
+              Back to Character Selection
             </button>
 
       </Link>

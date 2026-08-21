@@ -8,11 +8,6 @@ import '../css/HitBoxDetail.css';
 //Import Data
 import * as hitboxFields from '../data/hitboxFields.json'
 
-//Media Imports
-import x_dark from '../media/darkmode/x.png'
-import x_light from '../media/lightmode/x.png'
-let x = [x_dark, x_light]
-
 function HitBoxDetail(props) {
 
   //Configure Colors based on dark/light mode
@@ -46,7 +41,7 @@ function HitBoxDetail(props) {
     //Render the array of game data strings, and an exit button
     return (
       <div id="hitboxDetail" className={props.displayHitboxData ? "fadeIn" : "fadeOut"} style={style}>
-        <img id="exit" onClick={props.setDisplayHitboxData.bind(this, false)} src={x[Math.abs(props.settings.dark_light-1)]}/>
+        <span id="exit" className="material-symbols-rounded" onClick={props.setDisplayHitboxData.bind(this, false)}>close</span>
 
         {displayData}
         {infoToolTips}

@@ -50,6 +50,7 @@ function Loading(props) {
 					setUrls={props.setUrls}
 					currentMoveData={props.currentMoveData}
 					setLoading={props.setLoading}
+					settings={props.settings}
 				/>
 			</div>
 		</div>

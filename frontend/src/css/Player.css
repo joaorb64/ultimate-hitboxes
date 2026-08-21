@@ -10,21 +10,15 @@
 
 #share {
 	position: absolute;
+	top: 4px;
+	right: 4px;
 	cursor: pointer;
-	width: 2%;
-}
-/*Sizing for Desktop*/
-@media (min-width: 500px) {
-	#share {
-		width: 2%;
-	}
+	font-size: 20px;
+	opacity: .75;
 }
 
-/*Sizing for Mobile*/
-@media (max-width: 500px) {
-	#share {
-		width: 5%
-	}
+#share:hover {
+	opacity: 1;
 }
 
 #player {

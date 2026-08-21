@@ -1,0 +1,44 @@
+#portalGrid {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+#dataColumn {
+	min-width: 0;
+}
+
+#animationColumn {
+	min-width: 0;
+}
+
+@media (min-width: 900px) {
+	#portalGrid {
+		flex-direction: row;
+		align-items: flex-start;
+	}
+
+	#dataColumn {
+		flex: 1 1 55%;
+		order: 1;
+		overflow-x: auto;
+	}
+
+	#animationColumn {
+		flex: 1 1 45%;
+		order: 2;
+		position: sticky;
+		top: 20px;
+	}
+
+	#animationColumn #player {
+		width: 100%;
+		margin-left: 0;
+	}
+
+	#dataColumn #scrollable,
+	#dataColumn #not-scrollable {
+		height: auto;
+		overflow-y: visible;
+	}
+}

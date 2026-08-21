@@ -1,43 +1,77 @@
 #cookiePopup {
     position: fixed;
     bottom: 0;
-    width: 100%;
-    font-size: calc(10px + 2vmin);
+    left: 0;
+    right: 0;
+    z-index: 20;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 14px 20px;
+    background-color: inherit;
+    color: inherit;
+    border-top: 1px solid rgba(127, 127, 127, 0.25);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
 }
 
-.cookiePopup-0 {
-    background-color: #F2F3F4;
-    color: black;
+.cookieDescription {
+    flex: 1 1 320px;
 }
 
-.cookiePopup-1 {
-    background-color: #1B1B1B;
-    color: white;
+.cookieDescription p {
+    margin: 0;
+    font-size: 14px;
+    opacity: .85;
+    text-align: left;
+}
+
+#cookieButtons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 0 0 auto;
 }
 
 .cookieButton {
     cursor: pointer;
-    font-size: 17px;
+    font-size: 13px;
+    font-family: inherit;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(127, 127, 127, 0.4);
+    background-color: transparent;
+    color: inherit;
+    transition: opacity .15s ease-in-out;
+    white-space: nowrap;
+}
+
+.cookieButton:hover {
+    opacity: .75;
 }
 
 #acceptCookiesButton {
-    background-color: forestgreen;
-    border-color: forestgreen;
-    margin-right: 10%;
-}
-
-#rejectCookiesButton {
-    background-color: red;
-    border-color: red;
-    margin-right: 10%;
-}
-
-#moreInfoButton-0 {
-    background-color: black;
+    background-color: #6366F1;
+    border-color: #6366F1;
     color: white;
 }
 
-#moreInfoButton-1 {
-    background-color: white;
-    color: black;
+#rejectCookiesButton {
+    background-color: transparent;
+}
+
+#moreInfoButton {
+    background-color: transparent;
+    border-color: transparent;
+    text-decoration: underline;
+    opacity: .7;
+}
+
+@media (max-width: 500px) {
+    #cookiePopup {
+        justify-content: flex-start;
+        text-align: left;
+    }
 }

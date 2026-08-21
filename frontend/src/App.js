@@ -46,11 +46,12 @@ class App extends React.Component {
       settings: {
         showAllHitboxData: true,
         damageMultiplier: false,
-        showExtraInfo: false,
+        showExtraInfo: true,
         dark_light: 0,
         defaultPlaySpeed: 2,
         loopMove: true,
         scrollTable: true,
+        useHighResImages: false,
         sortBy: "number",
         cookiesEnabled: false,
       },
@@ -93,7 +94,8 @@ class App extends React.Component {
   setInitialSettings() {
     //Attempt to parse the cookie and use the values acquired to change the settings
     try {
-      let settings = JSON.parse(document.cookie.split("=")[1]);
+      let match = document.cookie.split("; ").find((row) => row.startsWith("settings="));
+      let settings = JSON.parse(match.slice("settings=".length));
 
       if (settings.loopMove === undefined) {
         settings.loopMove = true;
@@ -125,11 +127,14 @@ class App extends React.Component {
       });
     }
     if (settings.cookiesEnabled) {
+      let expiryDate = new Date();
+      expiryDate.setFullYear(expiryDate.getFullYear() + 1);
       document.cookie =
         "settings=" +
         JSON.stringify(settings) +
-        "; Expires=Fri, 1 Jan 2025 00:00:00 EST;" +
-        "path=/";
+        "; Expires=" +
+        expiryDate.toUTCString() +
+        "; path=/";
     }
   }
 
@@ -167,7 +172,7 @@ class App extends React.Component {
   render() {
     ////This extends the background color to the whole screen
     document.body.style.backgroundColor =
-      this.state.settings.dark_light === 0 ? "#1B1B1B" : "#F2F3F4";
+      this.state.settings.dark_light === 0 ? "#111318" : "#F6F6F8";
 
     if (this.state.characterData === undefined) {
       return null;
@@ -207,7 +212,7 @@ class App extends React.Component {
                 exact
                 render={() => (
                   <div>
-                    <div className="info">
+                    <div className="info homeIntro">
                       Check out hundreds of moves from Smash Ultimate at various
                       speeds and view in depth details on every hitbox related
                       to each move!{" "}

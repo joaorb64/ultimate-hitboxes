@@ -2,9 +2,15 @@
 import * as React from "react";
 
 import { useState, useEffect, useRef } from "react";
+import { assetBase } from "../data/assetBase";
 
-const frameURL = (props, frame) =>
-  `https://ultimate-hitboxes.s3.amazonaws.com/frames/${props.url.replace(/\+/g, "/")}/${frame}.png`;
+const frameURL = (props, frame) => {
+  const path = props.url.replace(/\+/g, "/");
+  if (props.settings.useHighResImages) {
+    return `https://raw.githubusercontent.com/joaorb64/ultimate-hitboxes/assets/${path}/${frame}.png`;
+  }
+  return `${assetBase}/${path}/${frame}.webp`;
+};
 
 function LoadingData(props) {
   //Empty array of images

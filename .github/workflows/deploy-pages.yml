@@ -20,6 +20,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Checkout optimized frame images (assets-web branch)
+        uses: actions/checkout@v4
+        with:
+          ref: assets-web
+          path: frontend/public
+      - name: Checkout character portraits and icons (assets branch)
+        uses: actions/checkout@v4
+        with:
+          ref: assets
+          path: frontend/public-icons
+          sparse-checkout: |
+            characters
+            icons
+            series-symbol
+          sparse-checkout-cone-mode: true
+      - name: Merge portrait/icon assets into public
+        run: cp -r frontend/public-icons/. frontend/public/ && rm -rf frontend/public-icons
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Setup Node

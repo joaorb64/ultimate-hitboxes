@@ -92,10 +92,21 @@ function Settings(props) {
 				
 				<div className="settingDiv">
 					<div className="setting">
-						<span className="settingHeader"><b>Default Speed</b></span>
-						
+						<input className="settingCheckbox" type="checkbox" onClick={() => { settings.useHighResImages = !settings.useHighResImages; props.changeSettings(settings) }} id="changeUseHighResImages" name="changeUseHighResImages" checked={settings.useHighResImages} />
+						<span className="settingHeader" onClick={() => { settings.useHighResImages = !settings.useHighResImages; props.changeSettings(settings) }}><b>Use high-resolution images</b></span>
 					</div>
-					<DefaultSpeed changeSpeed={props.changeDefaultSpeed} playSpeed={props.defaultPlaySpeed} settings={settings} changeSettings={props.changeSettings} />
+					<div className="settingDescription">
+						<p>
+							Loads full-resolution move animation frames instead of the optimized default. Larger file sizes and slower loading.
+						</p>
+					</div>
+				</div>
+
+				<div className="settingDiv">
+					<div className="setting">
+						<DefaultSpeed changeSpeed={props.changeDefaultSpeed} playSpeed={props.defaultPlaySpeed} settings={settings} changeSettings={props.changeSettings} />
+						<span className="settingHeader"><b>Default Speed</b></span>
+					</div>
 					<div className="settingDescription">
 						<p>
 							Speed that will be selected upon loading the site

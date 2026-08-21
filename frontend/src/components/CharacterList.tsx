@@ -10,8 +10,7 @@ import '../css/CharacterList.css';
 
 const sortingMethods = {
 	"name": "ascending",
-	"number": "ascending",
-	"count": "descending"
+	"number": "ascending"
 }
 
 function CharacterList(props) {
@@ -42,8 +41,18 @@ function CharacterList(props) {
 
 		return (
 			<div id="characterList">
-				<form>
-					<input id="searchbar" type="text" value={props.search} placeholder="Search for a Character" onChange={props.changeSearchValue} ></input>
+				<form id="searchControls">
+					<div id="searchbarWrapper">
+						<span className="material-symbols-rounded" id="searchIcon">search</span>
+						<input id="searchbar" type="text" value={props.search} placeholder="Search for a Character" onChange={props.changeSearchValue} ></input>
+						{props.search.length > 0 &&
+							<span
+								className="material-symbols-rounded"
+								id="searchClear"
+								onClick={() => { props.changeSearchValue({ target: { value: "" } }) }}
+							>close</span>
+						}
+					</div>
 
 					<SortBy changeSettings={props.changeSettings} settings={settings} />
 

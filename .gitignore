@@ -8,6 +8,15 @@ frontend/dist
 frontend/legacy
 frontend/node_modules
 frontend/.babelrc
+
+# Character images live on other branches, not master - the default optimized
+# (half-res WebP) frames on `assets-web`, full-res PNGs + portraits/icons on
+# `assets`. See .github/workflows/deploy-pages.yml, which checks those out here
+# at build time.
+frontend/public/frames
+frontend/public/characters
+frontend/public/icons
+frontend/public/series-symbol
 dbtest
 compose-dev.yml
 compose-prod.yml

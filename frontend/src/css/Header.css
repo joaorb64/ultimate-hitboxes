@@ -2,6 +2,12 @@
 #header {
 	top: 0%;
 	width: 100%;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 20px 24px 12px;
+	gap: 12px;
 }
 
 h3 {
@@ -21,75 +27,57 @@ h5 {
 	cursor: pointer;
 }
 
-
-
 #title {
-	width: 60%;
-	display: inline-block;
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+#title h3 {
+	margin: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#help, #links {
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+	gap: 14px;
 }
 
 .helpButtons {
 	cursor: pointer;
-	float: left;
+	font-size: 26px;
 }
 
 .linkButtons {
 	cursor: pointer;
-	float: right;
-}
-
-#settingsButton {
-	border-radius: 50%;
-	-webkit-transition: -webkit-transform .8s ease-in-out;
-
-}
-
-#settingsButton:hover {
-	-webkit-transform: rotate(360deg);
-	transform: rotate(360deg);
-}
-
-@media (min-width: 500px) {
-	#exitInfo {
-		width: 3%
-	}
-
-	.helpButtons, .linkButtons {
-		width: 15%
-	}
-
-	#twitter, #github, #settingsButton, #backButton {
-		margin-left: 5%;
-	}
-	#help, #links {
-		width: 20%;
-		display: inline-block;
-	}
+	width: 26px;
+	height: 26px;
 }
 
 /*Sizing for Mobile*/
 @media (max-width: 500px) {
-	#exitInfo {
-		width: 7%
+	#header {
+		padding: 16px 14px 10px;
+		gap: 6px;
 	}
 
-	.helpButtons, .linkButtons {
-		width: 30%;
+	#help, #links {
+		gap: 8px;
 	}
 
-	#twitter, #github, #settingsButton, #backButton {
-		margin-left: 5%;
+	.helpButtons {
+		font-size: 22px;
 	}
 
-	#title {
-		width: 40%
+	.linkButtons {
+		width: 22px;
+		height: 22px;
 	}
 
 	h3 {
 		font-size: 15px;
-	}
-	#help, #links {
-		width: 30%;
-		display: inline-block;
 	}
 }

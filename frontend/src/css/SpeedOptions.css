@@ -1,17 +1,19 @@
-.speedButton {
-	display: inline;
+#speedOptions {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	margin-top: 14px;
+	font-size: .8em;
 }
 
-#tenthSpeed, #quarterSpeed, #halfSpeed, #baseSpeed, #doubleSpeed {
-	margin-left: 5%;
-}
-
-@media (max-width: 400px) {
-	.speedLabel {
-		font-size: .8em;
-	}
-
-	#tenthSpeed, #quarterSpeed, #halfSpeed, #baseSpeed, #doubleSpeed {
-		margin-left: 3%;
-	}
+#playSpeedSelect {
+	padding: 6px 10px;
+	border-radius: 6px;
+	background-color: transparent;
+	color: inherit;
+	border: 1px solid rgba(127, 127, 127, 0.4);
+	font-family: inherit;
+	font-size: .95em;
+	cursor: pointer;
 }

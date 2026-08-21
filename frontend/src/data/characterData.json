@@ -781,5 +781,23 @@
     "completed": true,
     "series": "xenoblade",
     "version": "11.0.0"
+  },
+  {
+    "id": 88,
+    "name": "Kazuya",
+    "value": "kazuya",
+    "number": "81",
+    "completed": true,
+    "series": "tekken",
+    "version": "13.0.0"
+  },
+  {
+    "id": 89,
+    "name": "Sora",
+    "value": "sora",
+    "number": "82",
+    "completed": true,
+    "series": "kingdom-hearts",
+    "version": "13.0.0"
   }
 ]

@@ -8,20 +8,16 @@ function Slider(props) {
 		return null;
 	}
 
-	//CSS, move to CSS file later
-	let sliderStyle = {width: "100%"}
-
-	//Create TickMarks for RAnge slider
-	let tickMarks = []
+	let ticks = []
 	for (let i = 1; i <= props.totalFrames; i++) {
-		tickMarks.push(<option key={i}>{i}</option>)
+		ticks.push(<span key={i} className="sliderTick" />)
 	}
 
 	try {
 		return (
-			<div id="sliderContainer" style={sliderStyle}>
+			<div id="sliderContainer">
 				<h5>Frame: {props.currentFrame}/{props.totalFrames}</h5>
-				<div>
+				<div id="sliderTrackWrapper">
 					<input
 						id="videoSlider"
 						name="videoSlider"
@@ -30,19 +26,18 @@ function Slider(props) {
 						max={props.totalFrames}
 						value={props.currentFrame}
 						onChange={e => props.jumpToFrame(parseInt(e.target.value))}
-						list="ticks"
 					/>
+					<div id="sliderTicks">
+						{ticks}
+					</div>
 				</div>
-				<datalist id="ticks">
-					{tickMarks}
-				</datalist>
 			</div>
 		)
 	}
 	catch {
 		return null
 	}
-	
+
 }
 
 export default Slider

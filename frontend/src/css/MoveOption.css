@@ -1,12 +1,37 @@
+#moveSearchContainer {
+	position: relative;
+	display: inline-block;
+}
+
 #moveDropDown {
-	border-color: black;
-	border-width: 2px;
+	display: block;
+	box-sizing: border-box;
+	border: 1px solid rgba(127, 127, 127, 0.3);
+	border-radius: 10px;
+	background-color: rgba(127, 127, 127, 0.08);
+	color: inherit;
+	font-family: inherit;
+	outline: none;
+	cursor: text;
+	text-align: center;
+	transition: border-color .15s ease-in-out;
+}
+
+#moveDropDown:focus {
+	border-color: #6366F1;
+}
+
+#moveDropDown::placeholder {
+	color: inherit;
+	opacity: .7;
 }
 
 /*Sizing for Desktop*/
 @media (min-width: 500px) {
 	#moveDropDown {
-		width: 20%;
+		width: 260px;
+		height: 1.8em;
+		padding: 0 14px;
 		font-size: 15px;
 	}
 }
@@ -14,17 +39,72 @@
 /*Sizing for Mobile*/
 @media (max-width: 500px) {
 	#moveDropDown {
-		width: 60%;
+		width: 60vw;
+		height: 1.8em;
+		padding: 0 12px;
 		font-size: 12px;
 	}
 }
 
-.darkMoveDropDown, .darkMoveOption {
-	background-color: white;
+#moveSearchResults {
+	position: absolute;
+	top: calc(100% + 6px);
+	left: 0;
+	width: 100%;
+	max-height: 260px;
+	overflow-y: auto;
+	list-style: none;
+	margin: 0;
+	padding: 6px;
+	border-radius: 10px;
+	border: 1px solid rgba(127, 127, 127, 0.25);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+	z-index: 5;
+	text-align: left;
+	box-sizing: border-box;
+}
+
+.darkMoveDropDown {
+	background-color: #1c1e24;
+	color: white;
+}
+
+.lightMoveDropDown {
+	background-color: #ffffff;
 	color: black;
 }
 
-.lightMoveDropDown, .lightMoveOption {
-	background-color: black;
-	color: white;
+.moveSearchOption {
+	padding: 8px 10px;
+	border-radius: 6px;
+	cursor: pointer;
+	font-size: 14px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.moveSearchOption:hover {
+	background-color: rgba(99, 102, 241, 0.2);
+}
+
+.moveSearchOptionActive {
+	font-weight: 700;
+}
+
+.moveSearchOptionHighlighted {
+	background-color: rgba(99, 102, 241, 0.2);
+}
+
+.moveSearchOptionDisabled {
+	opacity: .35;
+	cursor: default;
+	pointer-events: none;
+}
+
+.moveSearchEmpty {
+	padding: 8px 10px;
+	font-size: 14px;
+	opacity: .6;
+	cursor: default;
 }

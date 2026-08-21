@@ -7,6 +7,15 @@
 	font-size: 15px;
 	margin: 0;
 	z-index: 1;
+	padding: 36px 20px 20px;
+	border-radius: 14px;
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+	box-sizing: border-box;
+	text-align: left;
+}
+
+#hitboxDetail p {
+	padding: 4px 0;
 }
 
 .fadeOut{
@@ -42,19 +51,20 @@ p {
 
 #exit {
 	position: absolute;
-	left: 0%;
-	top: 0%;
+	left: 8px;
+	top: 8px;
 	cursor: pointer;
+	font-size: 22px;
 }
 
 @media (max-width: 1200px) {
 	#exit {
-		width: 10%
+		font-size: 26px;
 	}
 }
 
 @media (min-width: 1200px) {
 	#exit {
-		width: 3%
+		font-size: 20px;
 	}
 }

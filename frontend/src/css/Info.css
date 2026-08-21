@@ -1,21 +1,46 @@
 #infoText {
-	left: 0%;
-	top: 0%;
 	width: 100%;
-	height: 100%;
-
-}
-
-.info {
-	font-size: .8em;
-	width: 80%;
-	margin: auto;
-}
-
-#donate {
-	margin-top: .5em;
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 8px 20px 40px;
+	box-sizing: border-box;
 }
 
 .infoSection {
-	margin-bottom: 1em;
+	background-color: rgba(127, 127, 127, 0.08);
+	border: 1px solid rgba(127, 127, 127, 0.16);
+	border-radius: 14px;
+	padding: 16px 20px;
+	margin-bottom: 14px;
+	text-align: left;
+}
+
+.infoSection h3 {
+	margin: 0 0 8px;
+	font-size: .95em;
+}
+
+.info {
+	font-size: .65em;
+	line-height: 1.5;
+	margin: 0;
+	opacity: .85;
+}
+
+.infoSection a {
+	color: #6366F1;
+	text-decoration: none;
+}
+
+.infoSection a:hover {
+	text-decoration: underline;
+}
+
+.creditsList {
+	list-style: none;
+	padding: 0;
+	margin: 10px 0 0;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
 }

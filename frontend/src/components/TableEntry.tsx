@@ -4,11 +4,6 @@ import * as React from "react"
 //CSS Imports
 import '../css/DataTable.css'
 
-//Media Imports
-import info_dark from '../media/darkmode/info.png'
-import info_light from '../media/lightmode/info.png'
-let info = [info_dark, info_light]
-
 //import id_colors from '../id_colors.js'
 
 function condenseFrames(arr) {
@@ -106,10 +101,10 @@ function TableEntry(props) {
 
     //If showing more data, create a button to click in the table
     else if (field.variable === "more") {
-      tdList.push(<td key={index} className={className} onClick={props.updateHitboxData.bind(this, props.hitbox)} style={{ cursor: "pointer", width: "5px" }}><img
-        src={info[props.settings.dark_light]}
-        style={{ width: "70%" }}
-      /></td >)
+      tdList.push(<td key={index} className={className} onClick={props.updateHitboxData.bind(this, props.hitbox)} style={{ cursor: "pointer", width: "5px" }}><span
+        className="material-symbols-rounded"
+        style={{ fontSize: "16px" }}
+      >info</span></td >)
     }
 
     //For any other value, display the value without alteration, unless the value doesn't exist, for which display a '-'
