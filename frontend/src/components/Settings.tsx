@@ -44,12 +44,12 @@ function Settings(props) {
 
 				<div className="settingDiv">
 					<div className="setting">
-						<input className="settingCheckbox" type="checkbox" onClick={screen.width < 500 ? null : () => { settings.showExtraInfo = !settings.showExtraInfo; props.changeSettings(settings) }} id="changeExtraInfo" name="changeExtraInfo" checked={settings.showExtraInfo} disabled={screen.width < 500} />
-						<span className="settingHeader" onClick={screen.width < 500 ? null : () => { settings.showExtraInfo = !settings.showExtraInfo; props.changeSettings(settings) }}><b>Show extra hitbox info</b></span>
+						<input className="settingCheckbox" type="checkbox" onClick={() => { settings.showExtraInfo = !settings.showExtraInfo; props.changeSettings(settings) }} id="changeExtraInfo" name="changeExtraInfo" checked={settings.showExtraInfo} />
+						<span className="settingHeader" onClick={() => { settings.showExtraInfo = !settings.showExtraInfo; props.changeSettings(settings) }}><b>Show extra hitbox info</b></span>
 					</div>
 					<div className="settingDescription">
 						<p>
-							Use this setting to expand the hitbox data table to show some additional information. Note that this setting is only available on larger screen devices
+							Use this setting to expand the hitbox data table to show some additional information.
 						</p>
 					</div>
 				</div>
