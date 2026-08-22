@@ -128,7 +128,7 @@
     "clang_rebound":
     {
         "variable": "clang_rebound",
-        "name": "Clang Rebound",
+        "name": "Clang",
         "toolTipID": "clang_rebound-ToolTip",
         "toolTipDescription": "Indicates how the hitbox interacts with other hitboxes"
     },

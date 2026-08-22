@@ -87,3 +87,40 @@ th {
 	top: 0;
 }
 
+/* Looks like a checkbox, but the underlying text is still "true"/"false"
+   so selecting and copying a row copies real words, not a glyph. */
+.boolValue {
+	position: relative;
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	font-size: inherit;
+	line-height: 15px;
+	color: transparent;
+	vertical-align: middle;
+}
+
+.boolValue::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border: 1.5px solid rgba(127, 127, 127, 0.5);
+	border-radius: 3px;
+	box-sizing: border-box;
+}
+
+.boolTrue::before {
+	background-color: #6366F1;
+	border-color: #6366F1;
+}
+
+.boolTrue::after {
+	content: "\2713";
+	position: absolute;
+	inset: 0;
+	color: white;
+	font-size: 11px;
+	line-height: 15px;
+	text-align: center;
+}
+

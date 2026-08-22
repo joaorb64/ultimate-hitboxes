@@ -39,6 +39,15 @@ function condenseFrames(arr) {
   return result;
 }
 
+function boolCell(key, className, value) {
+  let isTrue = value === "true"
+  return (
+    <td key={key} className={className}>
+      <span className={"boolValue " + (isTrue ? "boolTrue" : "boolFalse")}>{value}</span>
+    </td>
+  )
+}
+
 function TableEntry(props) {
 
   let style = {backgroundColor:null}
@@ -97,6 +106,18 @@ function TableEntry(props) {
     //Add Degree symbol after the angle
     else if (field.variable === "angle") {
       tdList.push(<td key={index} className={className}>{props.hitbox[field.variable]}&deg;</td>)
+    }
+
+    //Clang/rebound is stored as an attack_setoff_kind_on/off enum - normalize it to true/false
+    else if (field.variable === "clang_rebound") {
+      let raw = props.hitbox[field.variable]
+      let value = raw === "attack_setoff_kind_on" ? "true" : raw === "attack_setoff_kind_off" ? "false" : raw
+      tdList.push(boolCell(index, className, value))
+    }
+
+    //Render true/false values as a checkbox that still copies as the word true/false
+    else if (props.hitbox[field.variable] === "true" || props.hitbox[field.variable] === "false") {
+      tdList.push(boolCell(index, className, props.hitbox[field.variable]))
     }
 
     //If showing more data, create a button to click in the table
