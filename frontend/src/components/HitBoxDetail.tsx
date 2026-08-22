@@ -1,6 +1,7 @@
 //React Imports
 import * as React from "react"
 import ReactTooltip from "react-tooltip";
+import touchTooltipProps from "../data/touchTooltipProps";
 
 //CSS Imports
 import '../css/HitBoxDetail.css';
@@ -48,7 +49,7 @@ function HitBoxDetail(props) {
             </td>
           </tr>
         )
-        infoToolTips.push(<ReactTooltip key={pair[0]} id={pair[0]} place="top" effect="solid">{hitboxFields[pair[0]] ? hitboxFields[pair[0]]["toolTipDescription"] : ""}</ReactTooltip>)
+        infoToolTips.push(<ReactTooltip key={pair[0]} id={pair[0]} place="top" effect="solid" {...touchTooltipProps}>{hitboxFields[pair[0]] ? hitboxFields[pair[0]]["toolTipDescription"] : ""}</ReactTooltip>)
       }
     })
 

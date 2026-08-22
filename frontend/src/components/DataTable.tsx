@@ -1,6 +1,7 @@
 //Import React Elements
 import * as React from "react"
 import ReactTooltip from "react-tooltip";
+import touchTooltipProps from "../data/touchTooltipProps";
 
 //Import Components
 import HitboxTable from './HitboxTable'
@@ -100,7 +101,7 @@ function DataTable(props) {
                   >
                     {t.chip}
                   </span>
-                  <ReactTooltip id={`tableSetting-${t.key}`} place="top" effect="solid">{t.label}</ReactTooltip>
+                  <ReactTooltip id={`tableSetting-${t.key}`} place="top" effect="solid" {...touchTooltipProps}>{t.label}</ReactTooltip>
                 </React.Fragment>
               ))}
             </React.Fragment>

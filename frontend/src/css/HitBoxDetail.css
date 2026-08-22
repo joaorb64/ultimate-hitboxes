@@ -56,7 +56,7 @@
 #hitboxDetailBody td:first-child {
 	font-weight: 600;
 	white-space: nowrap;
-	cursor: help;
+	cursor: pointer;
 }
 
 #hitboxDetailBody td:last-child {
