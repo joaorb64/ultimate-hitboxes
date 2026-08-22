@@ -1,6 +1,9 @@
 //React Imports
 import * as React from "react"
 
+//Component Imports
+import AngleIndicator from './AngleIndicator'
+
 //CSS Imports
 import '../css/DataTable.css'
 
@@ -113,9 +116,22 @@ function TableEntry(props) {
       tdList.push(<td key={index} className={className}>{ground_air[props.hitbox[field.variable]] === undefined ? "-" : ground_air[props.hitbox[field.variable]]}</td>)
     }
 
-    //Add Degree symbol after the angle
+    //Add Degree symbol after the angle, plus a small compass showing the direction
     else if (field.variable === "angle") {
-      tdList.push(<td key={index} className={className}>{props.hitbox[field.variable]}&deg;</td>)
+      let numAngle = parseFloat(props.hitbox[field.variable])
+      let isSpecial = numAngle > 360
+      tdList.push(
+        <td key={index} className={className}>
+          <span
+            className={"angleCell" + (isSpecial ? " specialAngle" : "")}
+            data-tip={isSpecial || undefined}
+            data-for={isSpecial ? `specialAngle-${numAngle}` : undefined}
+          >
+            {props.hitbox[field.variable]}&deg;
+            <AngleIndicator angle={props.hitbox[field.variable]} />
+          </span>
+        </td>
+      )
     }
 
     //Several enum-valued fields carry a common prefix that's just noise here - strip it if present

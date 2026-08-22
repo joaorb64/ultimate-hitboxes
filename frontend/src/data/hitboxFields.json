@@ -39,7 +39,7 @@
         "variable": "angle",
         "name": "Angle",
         "toolTipID": "angle-ToolTip",
-        "toolTipDescription": "Launch Angle, 361 denotes the \"Sakurai Angle\""
+        "toolTipDescription": "Launch angle. Values above 360 are special angles (361 Sakurai, 363-368 Autolink) - see their compass icon for details"
     },
     "kbg":
     {

@@ -1,0 +1,8 @@
+{
+  "361": "Sakurai Angle. Launches at 0° (horizontal) until the hit deals 60+ knockback units, then scales up to 38° at 88+ units - and always 38° when hitting an airborne opponent.",
+  "363": "Autolink Angle. Launches the opponent in the direction the attacker is moving, without adjusting launch speed - used to help multi-hit moves connect.",
+  "365": "Autolink Angle. Sets the opponent's launch speed to 50% of the attacker's momentum, keeping them close as the attacker moves.",
+  "366": "Autolink Angle. Pulls the opponent toward the hitbox's center for 5 frames while matching the attacker's direction, then follows the attacker's momentum only.",
+  "367": "Autolink Angle. The most common one - knockback direction follows the attacker's movement and the opponent's position relative to the hitbox, with speed set by the attacker's momentum plus 20% of the positional difference.",
+  "368": "Autolink Angle. A mix of the 366° and 367° behaviors, aimed at specific points relative to the attacker rather than the hitbox's center."
+}

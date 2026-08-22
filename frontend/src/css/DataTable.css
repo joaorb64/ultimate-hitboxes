@@ -128,8 +128,21 @@ span {
 	font-size: .6em;
 }
 
+.angleCell {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 4px;
+	font-size: 1em;
+}
+
+.angleIndicator {
+	flex-shrink: 0;
+	opacity: .8;
+}
+
 .tableheader {
-	cursor: help;
+	cursor: pointer;
 	font-weight: 600;
 	font-size: .7em;
 	text-transform: uppercase;
