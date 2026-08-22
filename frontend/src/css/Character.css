@@ -1,22 +1,14 @@
 .character {
 	border: solid black 2px;
-	display: inline-block;
-	width: 300px;
-	height: 100px;
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+	width: 140px;
 	margin: 10px;
 	position: relative;
 	font-size: .7em;
-}
-
-@media (max-width: 1200px) {
-	.character {
-	}
-}
-
-@media (min-width: 1200px) {
-	.character {
-	}
-
+	overflow: hidden;
+	border-radius: 6px;
 }
 
 .character-complete {
@@ -42,34 +34,46 @@
 	border: solid gold 2px;
 }
 
-.name-dark {
-	text-shadow: -1px 1px 0 white, 1px 1px 0 white, 1px -1px 0 white, -1px -1px 0 white;
-	left: 1%;
-	position: absolute;
+.characterArtWrapper {
+	position: relative;
+	width: 100%;
+	height: 140px;
 }
 
-.name-light {
-	left: 1%;
-	text-shadow: -1px 1px 0 gray, 1px 1px 0 gray, 1px -1px 0 gray, -1px -1px 0 gray;
-	position: absolute;
+.characterArt {
+	width: 100%;
+	height: 140px;
+	object-fit: cover;
+	object-position: top;
+	display: block;
+}
+
+.name-dark, .name-light {
+	margin: 0;
+	padding: 6px 4px;
+	font-size: 1.1em;
+	text-align: center;
+	width: 100%;
+	box-sizing: border-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .number {
-	left: 0%;
-	top: 0%;
+	left: 4px;
+	top: 4px;
 	text-align: right;
 	position: absolute;
+	text-shadow: -1px 1px 0 black, 1px 1px 0 black, 1px -1px 0 black, -1px -1px 0 black;
+	color: white;
 }
 
 .version {
-	right: 0%;
-	bottom: 0%;
+	right: 4px;
+	bottom: 4px;
 	text-align: right;
 	position: absolute;
-}
-
-.series-icon {
-	height: 60%;
-	right: 0%;
-	position: absolute;
+	text-shadow: -1px 1px 0 black, 1px 1px 0 black, 1px -1px 0 black, -1px -1px 0 black;
+	color: white;
 }

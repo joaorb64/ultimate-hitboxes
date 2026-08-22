@@ -1,4 +1,4 @@
-﻿//React Imports
+//React Imports
 import * as React from "react"
 import { BrowserRouter as Router, Link } from 'react-router-dom'
 
@@ -6,12 +6,16 @@ import { BrowserRouter as Router, Link } from 'react-router-dom'
 import '../css/Character.css';
 import { assetBase } from '../data/assetBase';
 
+//Data Imports
+import * as portraitCodenames from '../data/portraitCodenames.json'
 
 function Character(props) {
-	//Get the character artwork from local assets using the character's name
-	let renderURL = `${assetBase}/characters/` + props.character.value + ".png"
-	//Get the symbol for the character's series from local assets using the series field in Character data
-	let seriesURL = `${assetBase}/series-symbol/` + props.character.series + ".png"
+	//Portraits are sourced from the StreamHelperAssets repo, keyed by each character's internal game codename.
+	//Fall back to the older locally-hosted portrait if a codename isn't mapped yet (e.g. Mythra).
+	let codename = portraitCodenames[props.character.value]
+	let renderURL = codename
+		? `https://raw.githubusercontent.com/joaorb64/StreamHelperAssets/main/games/ssbu/portrait/chara_0_${codename}_00.png`
+		: `${assetBase}/characters/` + props.character.value + ".png"
 
 	//Determines class the object should have
 	let dark_light = props.dark_light === 0 ? "dark" : "light"
@@ -19,19 +23,20 @@ function Character(props) {
 	let characterClassName = `character character-${complete} character-${dark_light}`
 	let nameClass = `name-${dark_light}`
 
-	//Return a box for the character showing their name, number, artwork, and series symbol.
+	//Return a box for the character showing their number, artwork, and name.
 	//Associated class varies based on if the character has completed data.Incomplete characters are not selectable and grayed out
 	if (props.character.completed) {
 		return (
 			<Link to={`/${props.character.value}`}>
 				<div className={characterClassName} value={props.character.value} onClick={() => console.log('Heading to /')}>
-					<small className="number">#{props.character.number.replace('e', 'ε')}</small>
-					<small className="version">{props.character.completed ? props.character.version : "Coming Soon"}</small>
+					<div className="characterArtWrapper">
+						<small className="number">#{props.character.number.replace('e', 'ε')}</small>
+						<small className="version">{props.character.completed ? props.character.version : "Coming Soon"}</small>
+						<img className="characterArt" src={renderURL} alt={props.character.name}></img>
+					</div>
 					<h2 className={nameClass}>
 						{props.character.name}
 					</h2>
-					<img className="characterArt" height="100" src={renderURL} alt={props.character.name}></img>
-					<img className="series-icon" src={seriesURL} alt={props.character.series}></img>
 				</div>
 			</Link>
 		)
@@ -39,11 +44,12 @@ function Character(props) {
 	else {
 		return (
 			<div className={characterClassName} value={props.character.value} /*onClick={props.getCharacterData.bind(this, props.character.value)}*/>
-				<small className="number" style={{ "position": "absolute" }}>#{props.character.number.replace('e', 'ε')}</small>
-				<small className="version" style={{ "position": "absolute" }}>{props.character.completed ? props.character.version : "Coming Soon"}</small>
-				<h2 className={nameClass} style={{ "position": "absolute" }}>{props.character.name}</h2>
-				<img src={renderURL} height="100" alt={props.character.name}></img>
-				<img className="series-icon" src={seriesURL} alt={props.character.series}></img>
+				<div className="characterArtWrapper">
+					<small className="number">#{props.character.number.replace('e', 'ε')}</small>
+					<small className="version">{props.character.completed ? props.character.version : "Coming Soon"}</small>
+					<img className="characterArt" src={renderURL} alt={props.character.name}></img>
+				</div>
+				<h2 className={nameClass}>{props.character.name}</h2>
 			</div>
 			)
 	}
