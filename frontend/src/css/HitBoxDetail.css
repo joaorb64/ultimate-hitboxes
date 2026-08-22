@@ -1,25 +1,75 @@
 #hitboxDetail {
-	position: absolute;
+	position: fixed;
 	top: 10%;
 	color: black;
 	background-color: white;
-	display: block;
+	display: flex;
+	flex-direction: column;
 	font-size: 15px;
 	margin: 0;
 	z-index: 10;
-	padding: 36px 20px 20px;
 	border-radius: 14px;
 	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
 	box-sizing: border-box;
 	text-align: left;
+	max-height: 80vh;
+	overflow: hidden;
 }
 
-#hitboxDetail p {
-	padding: 4px 0;
+#hitboxDetailHeader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex: 0 0 auto;
+	padding: 14px 16px;
+	border-bottom: 1px solid rgba(127, 127, 127, 0.25);
+}
+
+#hitboxDetailHeader h4 {
+	margin: 0;
+	font-size: 15px;
+}
+
+#hitboxDetailBody {
+	flex: 1 1 auto;
+	overflow-y: auto;
+	padding: 0 16px 16px;
+}
+
+#hitboxDetailBody table {
+	width: 400px;
+	max-width: 100%;
+	margin: 0 auto;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+
+#hitboxDetailBody td {
+	width: 50%;
+	padding: 6px 10px;
+	font-size: 13px;
+	border-bottom: 1px solid rgba(127, 127, 127, 0.15);
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#hitboxDetailBody td:first-child {
+	font-weight: 600;
+	white-space: nowrap;
+	cursor: help;
+}
+
+#hitboxDetailBody td:last-child {
+	text-align: left;
+	word-break: break-word;
+}
+
+#hitboxDetailBody tr:nth-child(even) {
+	background-color: rgba(127, 127, 127, 0.06);
 }
 
 .fadeOut{
-	opacity:0; 
+	opacity:0;
 	transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
 	pointer-events:none;
 
@@ -39,20 +89,19 @@
 
 @media (max-width: 1200px) {
 	#hitboxDetail {
-		width: 75%;
-		left: 12.5%;
+		width: 92%;
+		left: 4%;
 	}
 }
 
-p {
-	margin: 0;
-	padding: 0;
+@media (max-width: 500px) {
+	#hitboxDetail {
+		top: 5%;
+		max-height: 90vh;
+	}
 }
 
 #exit {
-	position: absolute;
-	left: 8px;
-	top: 8px;
 	cursor: pointer;
 	font-size: 22px;
 }
