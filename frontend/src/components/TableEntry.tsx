@@ -39,6 +39,16 @@ function condenseFrames(arr) {
   return result;
 }
 
+const enumPrefixes = {
+  effect: "collision_attr_",
+  type: "attack_region_",
+  collisionpart: "collision_part_mask_",
+  sfxlevel: "attack_sound_level_",
+  sfxtype: "collision_sound_attr_",
+  hitbits: "collision_category_mask_",
+  facingrestrict: "attack_lr_check_",
+}
+
 function boolCell(key, className, value) {
   let isTrue = value === "true"
   return (
@@ -106,6 +116,14 @@ function TableEntry(props) {
     //Add Degree symbol after the angle
     else if (field.variable === "angle") {
       tdList.push(<td key={index} className={className}>{props.hitbox[field.variable]}&deg;</td>)
+    }
+
+    //Several enum-valued fields carry a common prefix that's just noise here - strip it if present
+    else if (enumPrefixes[field.variable] !== undefined) {
+      let raw = props.hitbox[field.variable]
+      let prefix = enumPrefixes[field.variable]
+      let value = typeof raw === "string" && raw.startsWith(prefix) ? raw.slice(prefix.length) : raw
+      tdList.push(<td key={index} className={className}>{value === undefined || value === "" ? "-" : value}</td>)
     }
 
     //Clang/rebound is stored as an attack_setoff_kind_on/off enum - normalize it to true/false

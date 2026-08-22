@@ -158,6 +158,11 @@ function Main(props) {
     }
   }, [move]);
 
+  //Re-fetch the move's animation frames at the new resolution when the SD/HD setting is toggled
+  useEffect(() => {
+    setLoading(true);
+  }, [props.settings.useHighResImages]);
+
   //If move data doesn't exist or doesn't match the URL, query database to get move data
   try {
     if (

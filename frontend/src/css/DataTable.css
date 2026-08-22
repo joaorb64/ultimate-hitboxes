@@ -55,6 +55,30 @@
 	width: fit-content;
 	max-width: 100%;
 	margin: 0 auto;
+	scrollbar-width: auto;
+	scrollbar-color: rgba(127, 127, 127, 0.7) rgba(127, 127, 127, 0.12);
+}
+
+/* This table's own scrollbar is an important affordance (it's the only hint
+   that extra columns exist), so keep it visibly present instead of the
+   subtle site-wide overlay style used elsewhere */
+#hitboxTable::-webkit-scrollbar {
+	height: 12px;
+}
+
+#hitboxTable::-webkit-scrollbar-track {
+	background: rgba(127, 127, 127, 0.12);
+}
+
+#hitboxTable::-webkit-scrollbar-thumb {
+	background-color: rgba(127, 127, 127, 0.7);
+	border-radius: 10px;
+	border: 2px solid transparent;
+	background-clip: padding-box;
+}
+
+#hitboxTable::-webkit-scrollbar-thumb:hover {
+	background-color: rgba(127, 127, 127, 0.9);
 }
 
 @media (max-width: 400px) {
