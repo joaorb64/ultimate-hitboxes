@@ -16,7 +16,6 @@ import "./css/App.css";
 
 //Import components
 import Header from "./components/Header";
-import Settings from "./components/Settings";
 import Info from "./components/Info";
 import CharacterList from "./components/CharacterList";
 import Main from "./components/Main";
@@ -59,20 +58,12 @@ class App extends React.Component {
     };
 
     //Bind functions so they are usable within components
-    this.changeDefaultSpeed = this.changeDefaultSpeed.bind(this);
     this.changeSortBy = this.changeSortBy.bind(this);
     this.changeSearchValue = this.changeSearchValue.bind(this);
     this.setInitialSettings = this.setInitialSettings.bind(this);
     this.changeSettings = this.changeSettings.bind(this);
     this.changeMove = this.changeMove.bind(this);
     this.urlNotification = this.urlNotification.bind(this);
-  }
-
-  changeDefaultSpeed(event) {
-    //Update the play speed variable in the state
-    this.setState({
-      defaultPlaySpeed: event.target.value,
-    });
   }
 
   //Update the value to sort by in the character select
@@ -185,7 +176,10 @@ class App extends React.Component {
         >
           <ReactNotifications />
           <Router basename={basename}>
-            <Header dark_light={this.state.settings.dark_light} />
+            <Header
+              settings={this.state.settings}
+              changeSettings={this.changeSettings}
+            />
 
             <Switch>
               <Route
@@ -195,16 +189,7 @@ class App extends React.Component {
                 )}
               />
 
-              <Route
-                path="/settings"
-                render={() => (
-                  <Settings
-                    settings={this.state.settings}
-                    setInitialSettings={this.setInitialSettings}
-                    changeSettings={this.changeSettings}
-                  />
-                )}
-              />
+              <Redirect from="/settings" to="/" />
 
               <Route
                 path={["/"]}
@@ -244,6 +229,7 @@ class App extends React.Component {
                     <Main
                       characterListData={this.state.characterData}
                       settings={this.state.settings}
+                      changeSettings={this.changeSettings}
                       updateHitboxData={this.updateHitboxData}
                       urlNotification={this.urlNotification}
                     />

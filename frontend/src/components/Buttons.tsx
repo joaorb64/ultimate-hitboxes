@@ -122,6 +122,21 @@ function Buttons(props) {
 					render={index !== props.totalMoves - 1}
 				/>
 
+				<span
+					data-tip data-for="loopToolTip"
+					className={"material-symbols-rounded button" + (props.settings.loopMove ? " buttonActive" : "")}
+					id="loop"
+					onClick={() => {
+						let settings = JSON.parse(JSON.stringify(props.settings));
+						settings.loopMove = !settings.loopMove;
+						props.changeSettings(settings);
+					}}
+				>repeat</span>
+				<ToolTip
+					id="loopToolTip"
+					text={props.settings.loopMove ? "Looping Enabled" : "Looping Disabled"}
+					render={true}
+				/>
 
 			</div>
 		)

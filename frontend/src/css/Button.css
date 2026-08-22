@@ -18,6 +18,14 @@
 	background-color: rgba(127, 127, 127, 0.15);
 }
 
+.buttonActive {
+	color: #6366F1;
+}
+
+.buttonActive:hover {
+	background-color: rgba(99, 102, 241, 0.15);
+}
+
 .buttonNoClick {
 	cursor: default;
 	font-size: 32px;

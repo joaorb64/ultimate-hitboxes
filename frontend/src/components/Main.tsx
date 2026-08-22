@@ -206,6 +206,7 @@ function Main(props) {
         </div>
         <DataPortal
           settings={props.settings}
+          changeSettings={props.changeSettings}
           characterListData={props.characterListData}
           currentCharacterData={currentCharacterData}
           currentMoveData={currentMoveData}

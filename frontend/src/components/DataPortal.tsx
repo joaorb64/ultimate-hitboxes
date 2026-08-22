@@ -8,6 +8,7 @@ import Player from './Player'
 import Slider from './Slider'
 import Buttons from './Buttons'
 import SpeedOptions from './SpeedOptions'
+import QuickSettings from './QuickSettings'
 import DataTable from './DataTable';
 import HitboxDetail from './HitBoxDetail'
 import { assetBase } from '../data/assetBase'
@@ -40,6 +41,14 @@ function useInterval(callback, delay) {
 function DataPortal(props) {
 
   const [playSpeed, setPlaySpeed] = useState(props.settings.defaultPlaySpeed)
+
+  //Persist the last-used playback speed so it's selected by default next time
+  let changePlaySpeed = function (newSpeed) {
+    setPlaySpeed(newSpeed)
+    let settings = JSON.parse(JSON.stringify(props.settings));
+    settings.defaultPlaySpeed = newSpeed;
+    props.changeSettings(settings);
+  }
 
   const [displayHitboxData, setDisplayHitboxData] = useState(false)
   const [hitboxData, setHitboxData] = useState(undefined)
@@ -102,12 +111,18 @@ function DataPortal(props) {
               newMove={props.newMove}
               totalMoves={props.totalMoves}
               settings={props.settings}
+              changeSettings={props.changeSettings}
             />
 
             <SpeedOptions
-              setPlaySpeed={setPlaySpeed}
+              setPlaySpeed={changePlaySpeed}
               playSpeed={playSpeed}
               totalFrames={props.currentMoveData.frames}
+            />
+
+            <QuickSettings
+              settings={props.settings}
+              changeSettings={props.changeSettings}
             />
           </div>
 

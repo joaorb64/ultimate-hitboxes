@@ -6,6 +6,9 @@ import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
 //Import CSS
 import '../css/Header.css';
 
+//Component Imports
+import ToolTip from './ToolTip'
+
 //Import Media
 import twitter from '../media/twitter.png'
 
@@ -16,10 +19,16 @@ const github = [github_dark, github_light]
 function Header(props) {
   let history = useHistory();
 
+  let toggleDarkMode = function () {
+    let settings = JSON.parse(JSON.stringify(props.settings));
+    settings.dark_light = Math.abs(settings.dark_light - 1);
+    props.changeSettings(settings);
+  };
+
   return (
 
     //Main Header Object contains three portions from left to right
-    //help - Contains Info and Settings Buttons
+    //help - Contains Info, Dark/Light Mode Toggle, and Back Buttons
     //title - Contains site name
     //links - Contains links to github and twitter pages
     <div id="header">
@@ -28,9 +37,16 @@ function Header(props) {
           <span id="infoButton" className="material-symbols-rounded helpButtons">info</span>
         </Link>
 
-        <Link to="/settings">
-          <span id="settingsButton" className="material-symbols-rounded helpButtons">settings</span>
-        </Link>
+        <span
+          id="darkModeButton"
+          className="material-symbols-rounded helpButtons"
+          data-tip
+          data-for="darkModeToolTip"
+          onClick={toggleDarkMode}
+        >
+          {props.settings.dark_light === 0 ? "light_mode" : "dark_mode"}
+        </span>
+        <ToolTip id="darkModeToolTip" text={props.settings.dark_light === 0 ? "Switch to light mode" : "Switch to dark mode"} render={true} />
 
         <span id="backButton" className="material-symbols-rounded helpButtons" onClick={() => {history.goBack()}}>arrow_back</span>
 
@@ -47,7 +63,7 @@ function Header(props) {
           <img id="twitter" className="linkButtons" src={twitter}/>
         </a>
         <a href="https://github.com/joaorb64/ultimate-hitboxes">
-          <img id="github" className="linkButtons" src={github[props.dark_light]}/>
+          <img id="github" className="linkButtons" src={github[props.settings.dark_light]}/>
         </a>
       </div>
     </div>
