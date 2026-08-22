@@ -15,3 +15,30 @@
 	margin-left: 10%;
 	position: relative;
 }
+
+#resToggle {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	cursor: pointer;
+	padding: 4px 10px;
+	border-radius: 10px;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: .02em;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: white;
+	transition: background-color .15s ease-in-out;
+}
+
+#resToggle:hover {
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
+#resToggle.active {
+	background-color: #6366F1;
+}
+
+#resToggle.active:hover {
+	background-color: #4f52d6;
+}

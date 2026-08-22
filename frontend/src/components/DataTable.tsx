@@ -79,7 +79,33 @@ function DataTable(props) {
     return (
       <div id="dataTable">
 
-        <h5>{tableTitle}</h5>
+        <div id="dataTableHeader">
+          <h5>{tableTitle}</h5>
+          {props.type === "hitboxes" ? (
+            <React.Fragment>
+              {[
+                { key: "showAllHitboxData", chip: "Show All Hitboxes", label: "Show all hitboxes at all times" },
+                { key: "damageMultiplier", chip: "1v1 Multi", label: "Apply 1v1 damage multiplier" },
+                { key: "showExtraInfo", chip: "Extended Table", label: "Show extra hitbox info in the table" },
+              ].map(t => (
+                <React.Fragment key={t.key}>
+                  <span
+                    className={"tableSettingChip" + (props.settings[t.key] ? " active" : "")}
+                    data-tip data-for={`tableSetting-${t.key}`}
+                    onClick={() => {
+                      let settings = JSON.parse(JSON.stringify(props.settings));
+                      settings[t.key] = !settings[t.key];
+                      props.changeSettings(settings);
+                    }}
+                  >
+                    {t.chip}
+                  </span>
+                  <ReactTooltip id={`tableSetting-${t.key}`} place="top" effect="solid">{t.label}</ReactTooltip>
+                </React.Fragment>
+              ))}
+            </React.Fragment>
+          ) : null}
+        </div>
         <HitboxTable
           type={props.type}
           portalState={props.portalState}

@@ -3,10 +3,45 @@
 	text-align: left;
 }
 
+#dataTableHeader {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: 8px;
+}
+
 #dataTable h5 {
 	font-size: .8em;
-	margin-bottom: 8px;
+	margin: 0;
 	opacity: .8;
+}
+
+.tableSettingChip {
+	cursor: pointer;
+	padding: 4px 10px;
+	border-radius: 10px;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: .02em;
+	text-transform: uppercase;
+	white-space: nowrap;
+	background-color: rgba(127, 127, 127, 0.08);
+	border: 1px solid rgba(127, 127, 127, 0.3);
+	color: inherit;
+	opacity: .65;
+	transition: opacity .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, color .15s ease-in-out;
+}
+
+.tableSettingChip:hover {
+	opacity: .9;
+}
+
+.tableSettingChip.active {
+	opacity: 1;
+	background-color: #6366F1;
+	border-color: #6366F1;
+	color: white;
 }
 
 #hitboxTable {
@@ -14,6 +49,8 @@
 	overflow-x: auto;
 	overflow-y: hidden;
 	border: 1px solid rgba(127, 127, 127, 0.25);
+	width: fit-content;
+	max-width: 100%;
 }
 
 @media (max-width: 400px) {
@@ -43,9 +80,6 @@ table, th, td {
 	text-align: center;
 }
 
-table {
-	width: 100%;
-}
 
 th, td {
 	padding: 5px 8px;
@@ -69,7 +103,7 @@ span {
 .tableheader {
 	cursor: help;
 	font-weight: 600;
-	font-size: .85em;
+	font-size: .7em;
 	text-transform: uppercase;
 	letter-spacing: .02em;
 }

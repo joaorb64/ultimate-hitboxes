@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Link } from 'react-router-dom'
 
 //Component Imports
 import ToolTip from './ToolTip';
+import SpeedOptions from './SpeedOptions';
 
 //CSS Imports
 import '../css/Button.css';
@@ -136,6 +137,12 @@ function Buttons(props) {
 					id="loopToolTip"
 					text={props.settings.loopMove ? "Looping Enabled" : "Looping Disabled"}
 					render={true}
+				/>
+
+				<SpeedOptions
+					setPlaySpeed={props.setPlaySpeed}
+					playSpeed={props.playSpeed}
+					totalFrames={totalFrames}
 				/>
 
 			</div>

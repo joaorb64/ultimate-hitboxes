@@ -7,8 +7,6 @@ import { useState, useEffect, useRef } from 'react';
 import Player from './Player'
 import Slider from './Slider'
 import Buttons from './Buttons'
-import SpeedOptions from './SpeedOptions'
-import QuickSettings from './QuickSettings'
 import DataTable from './DataTable';
 import HitboxDetail from './HitBoxDetail'
 import { assetBase } from '../data/assetBase'
@@ -86,6 +84,7 @@ function DataPortal(props) {
               url={`${assetBase}/frames/${props.currentCharacterData.number}_${props.currentCharacterData.value}/${props.currentMoveData.value}/`}
               currentFrame={props.currentFrame}
               settings={props.settings}
+              changeSettings={props.changeSettings}
               character={props.currentCharacterData.value}
               move={props.currentMoveData.value}
               loadingPercent={props.loadingPercent}
@@ -112,17 +111,8 @@ function DataPortal(props) {
               totalMoves={props.totalMoves}
               settings={props.settings}
               changeSettings={props.changeSettings}
-            />
-
-            <SpeedOptions
-              setPlaySpeed={changePlaySpeed}
               playSpeed={playSpeed}
-              totalFrames={props.currentMoveData.frames}
-            />
-
-            <QuickSettings
-              settings={props.settings}
-              changeSettings={props.changeSettings}
+              setPlaySpeed={changePlaySpeed}
             />
           </div>
 
@@ -131,6 +121,7 @@ function DataPortal(props) {
               {props.currentMoveData.hitboxes !== undefined && props.currentMoveData.hitboxes.length > 0 ? <DataTable
                 type="hitboxes"
                 settings={props.settings}
+                changeSettings={props.changeSettings}
                 move={props.currentMoveData}
                 loading={props.loading}
                 currentFrame={props.currentFrame}
@@ -142,6 +133,7 @@ function DataPortal(props) {
               {props.currentMoveData.grabs !== undefined ? <DataTable
                 type="grabs"
                 settings={props.settings}
+                changeSettings={props.changeSettings}
                 move={props.currentMoveData}
                 jumpToFrame={props.jumpToFrame}
                 loading={props.loading}
@@ -152,6 +144,7 @@ function DataPortal(props) {
               {props.currentMoveData.throws !== undefined ? <DataTable
                 type="throws"
                 settings={props.settings}
+                changeSettings={props.changeSettings}
                 move={props.currentMoveData}
                 jumpToFrame={props.jumpToFrame}
                 loading={props.loading}
@@ -162,6 +155,7 @@ function DataPortal(props) {
               {props.currentMoveData.hurtboxes !== undefined ? <DataTable
                 type="hurtboxes"
                 settings={props.settings}
+                changeSettings={props.changeSettings}
                 move={props.currentMoveData}
                 jumpToFrame={props.jumpToFrame}
                 loading={props.loading}
