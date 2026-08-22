@@ -1,14 +1,17 @@
 .character {
-	border: solid black 2px;
-	display: inline-flex;
-	flex-direction: column;
-	align-items: center;
+	--portraitTextStroke: -2px 0 0 black, 2px 0 0 black, 0 -2px 0 black, 0 2px 0 black,
+		-2px -2px 0 black, 2px -2px 0 black, -2px 2px 0 black, 2px 2px 0 black;
+	border: 1px solid rgba(127, 127, 127, 0.3);
+	background-color: rgba(127, 127, 127, 0.08);
+	display: inline-block;
 	width: 140px;
+	aspect-ratio: 1 / 1;
 	margin: 10px;
 	position: relative;
 	font-size: .7em;
 	overflow: hidden;
 	border-radius: 18px;
+	transition: border-color .15s ease-in-out;
 }
 
 .character-complete {
@@ -20,37 +23,30 @@
 	opacity: 0.4;
 }
 
-.character-dark {
-	background-color: #E7E7EF;
-	color: black;
-}
-
-.character-light {
-	background-color: #22242C;
-	color: white;
-}
-
 .character-complete:hover {
-	border: solid gold 2px;
-}
-
-.characterArtWrapper {
-	position: relative;
-	width: 100%;
-	height: 140px;
+	border-color: gold;
 }
 
 .characterArt {
 	width: 100%;
-	height: 140px;
+	height: 100%;
 	object-fit: cover;
 	object-position: top;
 	display: block;
 }
 
+.nameOverlay {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 20px 6px 8px;
+	background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+	pointer-events: none;
+}
+
 .name-dark, .name-light {
 	margin: 0;
-	padding: 6px 4px;
 	font-size: 0.85em;
 	text-align: center;
 	width: 100%;
@@ -58,6 +54,8 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	color: white;
+	text-shadow: var(--portraitTextStroke);
 }
 
 .number {
@@ -65,17 +63,17 @@
 	top: 4px;
 	text-align: right;
 	position: absolute;
-	font-size: 1.5em;
+	font-size: 1.2em;
 	font-weight: bold;
-	text-shadow: -1px 1px 0 black, 1px 1px 0 black, 1px -1px 0 black, -1px -1px 0 black;
+	text-shadow: var(--portraitTextStroke);
 	color: white;
 }
 
 .version {
 	right: 4px;
-	bottom: 4px;
+	top: 4px;
 	text-align: right;
 	position: absolute;
-	text-shadow: -1px 1px 0 black, 1px 1px 0 black, 1px -1px 0 black, -1px -1px 0 black;
+	text-shadow: var(--portraitTextStroke);
 	color: white;
 }

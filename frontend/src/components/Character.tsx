@@ -25,7 +25,7 @@ function Character(props) {
 	//Determines class the object should have
 	let dark_light = props.dark_light === 0 ? "dark" : "light"
 	let complete = props.character.completed ? "complete" : "incomplete"
-	let characterClassName = `character character-${complete} character-${dark_light}`
+	let characterClassName = `character character-${complete}`
 	let nameClass = `name-${dark_light}`
 
 	//Return a box for the character showing their number, artwork, and name.
@@ -34,14 +34,12 @@ function Character(props) {
 		return (
 			<Link to={`/${props.character.value}`}>
 				<div className={characterClassName} value={props.character.value} onClick={() => console.log('Heading to /')}>
-					<div className="characterArtWrapper">
-						<small className="number">#{props.character.number.replace('e', 'ε')}</small>
-						<small className="version">{props.character.completed ? props.character.version : "Coming Soon"}</small>
-						<img className="characterArt" src={renderURL} alt={props.character.name}></img>
+					<small className="number">#{props.character.number.replace('e', 'ε')}</small>
+					<small className="version">{props.character.completed ? props.character.version : "Coming Soon"}</small>
+					<img className="characterArt" src={renderURL} alt={props.character.name}></img>
+					<div className="nameOverlay">
+						<h2 className={nameClass}>{props.character.name}</h2>
 					</div>
-					<h2 className={nameClass}>
-						{props.character.name}
-					</h2>
 				</div>
 			</Link>
 		)
@@ -49,12 +47,12 @@ function Character(props) {
 	else {
 		return (
 			<div className={characterClassName} value={props.character.value} /*onClick={props.getCharacterData.bind(this, props.character.value)}*/>
-				<div className="characterArtWrapper">
-					<small className="number">#{props.character.number.replace('e', 'ε')}</small>
-					<small className="version">{props.character.completed ? props.character.version : "Coming Soon"}</small>
-					<img className="characterArt" src={renderURL} alt={props.character.name}></img>
+				<small className="number">#{props.character.number.replace('e', 'ε')}</small>
+				<small className="version">{props.character.completed ? props.character.version : "Coming Soon"}</small>
+				<img className="characterArt" src={renderURL} alt={props.character.name}></img>
+				<div className="nameOverlay">
+					<h2 className={nameClass}>{props.character.name}</h2>
 				</div>
-				<h2 className={nameClass}>{props.character.name}</h2>
 			</div>
 			)
 	}
