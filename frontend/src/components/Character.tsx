@@ -4,18 +4,23 @@ import { BrowserRouter as Router, Link } from 'react-router-dom'
 
 //CSS Imports
 import '../css/Character.css';
-import { assetBase } from '../data/assetBase';
 
 //Data Imports
 import * as portraitCodenames from '../data/portraitCodenames.json'
+import mythraPortrait from '../media/mythra-portrait.png'
+
+//Locally-hosted portraits for characters missing from the StreamHelperAssets repo (e.g. Mythra shares an
+//in-game asset with Pyra, so her dedicated icon isn't published there)
+const portraitOverrides = {
+	mythra: mythraPortrait
+}
 
 function Character(props) {
 	//Portraits are sourced from the StreamHelperAssets repo, keyed by each character's internal game codename.
-	//Fall back to the older locally-hosted portrait if a codename isn't mapped yet (e.g. Mythra).
 	let codename = portraitCodenames[props.character.value]
 	let renderURL = codename
 		? `https://raw.githubusercontent.com/joaorb64/StreamHelperAssets/main/games/ssbu/portrait/chara_0_${codename}_00.png`
-		: `${assetBase}/characters/` + props.character.value + ".png"
+		: portraitOverrides[props.character.value]
 
 	//Determines class the object should have
 	let dark_light = props.dark_light === 0 ? "dark" : "light"

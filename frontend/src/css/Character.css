@@ -8,7 +8,7 @@
 	position: relative;
 	font-size: .7em;
 	overflow: hidden;
-	border-radius: 6px;
+	border-radius: 18px;
 }
 
 .character-complete {
@@ -21,12 +21,12 @@
 }
 
 .character-dark {
-	background-color: white;
+	background-color: #E7E7EF;
 	color: black;
 }
 
 .character-light {
-	background-color: gray;
+	background-color: #22242C;
 	color: white;
 }
 
@@ -51,7 +51,7 @@
 .name-dark, .name-light {
 	margin: 0;
 	padding: 6px 4px;
-	font-size: 1.1em;
+	font-size: 0.85em;
 	text-align: center;
 	width: 100%;
 	box-sizing: border-box;
@@ -65,6 +65,8 @@
 	top: 4px;
 	text-align: right;
 	position: absolute;
+	font-size: 1.5em;
+	font-weight: bold;
 	text-shadow: -1px 1px 0 black, 1px 1px 0 black, 1px -1px 0 black, -1px -1px 0 black;
 	color: white;
 }
