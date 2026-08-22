@@ -24,7 +24,8 @@
 }
 
 .character-complete:hover {
-	border-color: gold;
+	border-color: white;
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
 .characterArt {
@@ -50,6 +51,7 @@
 	font-size: 0.85em;
 	line-height: 1.15;
 	text-align: center;
+	text-transform: uppercase;
 	width: 100%;
 	box-sizing: border-box;
 	display: -webkit-box;
