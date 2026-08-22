@@ -12,6 +12,7 @@
 }
 
 #dataTable h5 {
+	flex: 1 0 100%;
 	font-size: .8em;
 	margin: 0;
 	opacity: .8;
@@ -51,6 +52,7 @@
 	border: 1px solid rgba(127, 127, 127, 0.25);
 	width: fit-content;
 	max-width: 100%;
+	margin: 0 auto;
 }
 
 @media (max-width: 400px) {
