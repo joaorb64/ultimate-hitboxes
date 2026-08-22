@@ -10,7 +10,7 @@
 }
 
 #hitboxTable {
-	border-radius: 10px;
+	border-radius: 18px;
 	overflow-x: auto;
 	overflow-y: hidden;
 	border: 1px solid rgba(127, 127, 127, 0.25);
@@ -105,7 +105,7 @@ th {
 	position: absolute;
 	inset: 0;
 	border: 1.5px solid rgba(127, 127, 127, 0.5);
-	border-radius: 3px;
+	border-radius: 5px;
 	box-sizing: border-box;
 }
 
