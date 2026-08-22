@@ -5,7 +5,7 @@ import { useParams, Link } from 'react-router-dom';
 function InvalidPage(props) {
     return(
         <div id="characterChoiceBar">
-      <Link to="/characters">
+      <Link to="/">
 
             <button id="chooseCharacterButton">
               <span className="material-symbols-rounded">arrow_back</span>

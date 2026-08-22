@@ -79,17 +79,29 @@ a {
   font-size: 18px;
 }
 
+#moveSelectionRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+#characterChoiceBar #share {
+  cursor: pointer;
+  font-size: 24px;
+  opacity: .75;
+}
+
+#characterChoiceBar #share:hover {
+  opacity: 1;
+}
+
 #main {
   display: flex;
   flex-direction: column;
   height: 100%;
   margin: 0 auto;
-}
-
-#scrollable {
-  overflow-y: scroll;
-  flex-shrink: 0;
-  
+  box-sizing: border-box;
+  padding: 0 16px;
 }
 
 /*Sizing for Desktop*/
@@ -102,9 +114,6 @@ a {
   #main {
     width: 80%;
   }
-  #scrollable {
-    height: 25vh;
-  }
 }
 
 /*Sizing for Mobile*/
@@ -116,10 +125,6 @@ a {
 
   #main {
     width: 100%;
-  }
-
-  #scrollable {
-    height: 33vh;
   }
 }
 

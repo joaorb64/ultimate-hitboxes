@@ -40,6 +40,14 @@ body {
   display: none;
 }
 
+/* Tooltips are a hover affordance; on touch devices a tap leaves them
+   stuck open with no hover-out to dismiss them, so just don't show them. */
+@media (hover: none) {
+  .__react_component_tooltip {
+    display: none !important;
+  }
+}
+
 .material-symbols-rounded {
   font-family: 'Material Symbols Rounded';
   font-weight: normal;

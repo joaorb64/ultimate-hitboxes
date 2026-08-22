@@ -80,18 +80,6 @@ function Settings(props) {
 
 				<div className="settingDiv">
 					<div className="setting">
-						<input className="settingCheckbox" type="checkbox" onClick={() => { settings.scrollTable = !settings.scrollTable; props.changeSettings(settings) }} id="changeScrollTable" name="changeScrollTable" checked={settings.scrollTable} />
-						<span className="settingHeader" onClick={() => { settings.scrollTable = !settings.scrollTable; props.changeSettings(settings) }}><b>Scrollable Table</b></span>
-					</div>
-					<div className="settingDescription">
-						<p>
-							Allows hitbox table to be scrolled through while keeping the hitbox visual & button positions fixed, useful for moves with lots of hitboxes.
-						</p>
-					</div>
-				</div>
-				
-				<div className="settingDiv">
-					<div className="setting">
 						<input className="settingCheckbox" type="checkbox" onClick={() => { settings.useHighResImages = !settings.useHighResImages; props.changeSettings(settings) }} id="changeUseHighResImages" name="changeUseHighResImages" checked={settings.useHighResImages} />
 						<span className="settingHeader" onClick={() => { settings.useHighResImages = !settings.useHighResImages; props.changeSettings(settings) }}><b>Use high-resolution images</b></span>
 					</div>

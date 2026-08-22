@@ -112,7 +112,7 @@ function DataPortal(props) {
           </div>
 
           <div id="dataColumn">
-            <div id={props.settings.scrollTable ? "scrollable" : "not-scrollable"}>
+            <div id="dataTableContainer">
               {props.currentMoveData.hitboxes !== undefined && props.currentMoveData.hitboxes.length > 0 ? <DataTable
                 type="hitboxes"
                 settings={props.settings}

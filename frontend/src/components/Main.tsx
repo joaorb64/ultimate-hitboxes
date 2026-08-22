@@ -8,7 +8,14 @@ import DataPortal from "./DataPortal";
 import Loading from "./Loading";
 import InvalidPage from "./InvalidPage";
 import MoveDropDown from "./MoveDropDown";
+import ToolTip from "./ToolTip";
 import { getCharacterData, getMoveData } from "../data/staticData";
+
+const shareOrigin =
+  window.location.origin +
+  (window.location.hostname.endsWith("github.io")
+    ? `/${window.location.pathname.split("/").filter(Boolean)[0] || ""}`
+    : "");
 
 //CSS Imports
 import "../css/Player.css";
@@ -37,6 +44,18 @@ function Main(props) {
     setPlaying(false);
     setMove(move);
     setCurrentFrame(1);
+  };
+
+  let copyToClipboard = function () {
+    const el = document.createElement("textarea");
+    el.value = playing
+      ? `${shareOrigin}/${character}/${move}`
+      : `${shareOrigin}/${character}/${move}/${currentFrame}`;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+    props.urlNotification();
   };
 
   //Determine which character is the current character, save the data and the index
@@ -165,19 +184,25 @@ function Main(props) {
     return (
       <div>
         <div id="characterChoiceBar">
-          <Link to="/characters">
-            <button id="chooseCharacterButton">
-              <span className="material-symbols-rounded">arrow_back</span>
-              Back to Character Selection
-            </button>
-          </Link>
           <h2 id="currentCharacterName">{currentCharacterData.name}</h2>
-          <MoveDropDown
-            currentCharacterData={currentCharacterData}
-            currentMoveData={currentMoveData}
-            settings={props.settings}
-            newMove={newMove}
-          />
+          <div id="moveSelectionRow">
+            <MoveDropDown
+              currentCharacterData={currentCharacterData}
+              currentMoveData={currentMoveData}
+              settings={props.settings}
+              newMove={newMove}
+            />
+            <span
+              id="share"
+              className="material-symbols-rounded"
+              data-tip
+              data-for="shareToolTip"
+              onClick={copyToClipboard}
+            >
+              share
+            </span>
+            <ToolTip id="shareToolTip" text="Copy the link to this move" render={true} />
+          </div>
         </div>
         <DataPortal
           settings={props.settings}

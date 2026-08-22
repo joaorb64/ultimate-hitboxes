@@ -48,13 +48,13 @@ h5 {
 
 .helpButtons {
 	cursor: pointer;
-	font-size: 26px;
+	font-size: 30px;
 }
 
 .linkButtons {
 	cursor: pointer;
-	width: 26px;
-	height: 26px;
+	width: 30px;
+	height: 30px;
 }
 
 /*Sizing for Mobile*/
@@ -66,15 +66,6 @@ h5 {
 
 	#help, #links {
 		gap: 8px;
-	}
-
-	.helpButtons {
-		font-size: 22px;
-	}
-
-	.linkButtons {
-		width: 22px;
-		height: 22px;
 	}
 
 	h3 {

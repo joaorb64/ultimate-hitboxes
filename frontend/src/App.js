@@ -50,7 +50,6 @@ class App extends React.Component {
         dark_light: 0,
         defaultPlaySpeed: 2,
         loopMove: true,
-        scrollTable: true,
         useHighResImages: false,
         sortBy: "number",
         cookiesEnabled: false,
@@ -228,23 +227,6 @@ class App extends React.Component {
                       changeSettings={this.changeSettings}
                     />
                   </div>
-                )}
-              />
-
-              <Route
-                path={["/characters"]}
-                exact
-                render={() => (
-                  <CharacterList
-                    characterListData={this.state.characterData}
-                    updateCurrentCharacter={this.updateCurrentCharacter}
-                    getCharacterData={this.getCharacterData}
-                    search={this.state.search}
-                    changeSearchValue={this.changeSearchValue}
-                    setInitialSettings={this.setInitialSettings}
-                    settings={this.state.settings}
-                    changeSettings={this.changeSettings}
-                  />
                 )}
               />
 

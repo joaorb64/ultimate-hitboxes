@@ -1,105 +1,98 @@
 #characterList {
-	left:			0%;
-	top:			0%;
-	width: 100%;
-	height: 100%
+  left: 0%;
+  top: 0%;
+  width: 100%;
+  height: 100%;
 }
 
 #searchControls {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 10px;
-	margin-top: 20px;
-	margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 #searchbarWrapper {
-	position: relative;
-	width: 60%;
-	max-width: 320px;
-	margin: 0 auto;
+  position: relative;
+  width: min(80vw, 500px);
+  margin: 0 auto;
 }
 
 #searchbar {
-	display: block;
-	box-sizing: border-box;
-	width: 100%;
-	height: 1.8em;
-	padding: 0 34px;
-	border: 1px solid rgba(127, 127, 127, 0.3);
-	border-radius: 10px;
-	background-color: rgba(127, 127, 127, 0.08);
-	color: inherit;
-	font-size: .65em;
-	font-family: inherit;
-	outline: none;
-	transition: border-color .15s ease-in-out;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 2.4em;
+  padding: 0 38px;
+  border: 1px solid rgba(127, 127, 127, 0.3);
+  border-radius: 10px;
+  background-color: rgba(127, 127, 127, 0.08);
+  color: inherit;
+  font-size: 16px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s ease-in-out;
 }
 
 #searchbar::placeholder {
-	color: inherit;
-	opacity: .5;
+  color: inherit;
+  opacity: 0.5;
 }
 
 #searchbar:focus {
-	border-color: #6366F1;
+  border-color: #6366f1;
 }
 
 #searchIcon {
-	position: absolute;
-	left: 8px;
-	top: 50%;
-	transform: translateY(-50%);
-	font-size: 16px;
-	opacity: .5;
-	pointer-events: none;
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 #searchClear {
-	position: absolute;
-	right: 6px;
-	top: 50%;
-	transform: translateY(-50%);
-	font-size: 16px;
-	opacity: .5;
-	cursor: pointer;
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  opacity: 0.5;
+  cursor: pointer;
 }
 
 #searchClear:hover {
-	opacity: .9;
+  opacity: 0.9;
 }
 
 #sortBy {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 20px;
-	font-size: .75em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  font-size: 16px;
 }
 
 .sortOption {
-	display: inline-flex;
-	align-items: center;
-	gap: 6px;
-	cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
 }
 
 .sortOption input {
-	cursor: pointer;
-	accent-color: #6366F1;
+  cursor: pointer;
+  accent-color: #6366f1;
 }
 
 .sortOption label {
-	cursor: pointer;
-}
-
-@media (max-width: 500px) {
-	#searchbarWrapper {
-		width: 80%;
-	}
+  cursor: pointer;
 }
 
 label {
-	font-size: 15;
+  font-size: 15;
 }
