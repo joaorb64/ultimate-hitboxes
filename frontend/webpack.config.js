@@ -6,7 +6,13 @@ module.exports = (env, argv) => ({
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
-    publicPath: argv.mode === "development" ? "/" : "./",
+    // A relative "./" public path breaks for deep-linked routes: the SPA GitHub Pages 404
+    // redirect trick has to call history.replaceState to restore the real URL before React
+    // Router mounts, but that changes the document's base URL out from under every relative
+    // asset reference that resolves after it (fonts, CSS url(), etc) - so bundle.js and
+    // everything it references needs an absolute path that doesn't care what the current
+    // URL depth is.
+    publicPath: argv.mode === "development" ? "/" : "/ultimate-hitboxes/",
   },
   resolve: {
     alias: {
