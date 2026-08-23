@@ -58,92 +58,96 @@ function Buttons(props) {
 		return (
 			<div id="buttons">
 
-				<Link to={prevMove !== undefined ? `/${props.currentCharacterData.value}/${prevMove.value}` : null}>
+				<div id="transportControls">
+					<Link to={prevMove !== undefined ? `/${props.currentCharacterData.value}/${prevMove.value}` : null}>
+						<span
+							data-tip data-for="previousToolTip"
+							className={"material-symbols-rounded " + (index !== 0 ? "button" : "buttonNoClick")}
+							id="previous"
+							onClick={() => { props.newMove(prevMove.value) }}
+						>skip_previous</span>
+					</Link>
+					<ToolTip
+						id="previousToolTip"
+						text="Show Previous Move"
+						render={index !== 0}
+					/>
+
 					<span
-						data-tip data-for="previousToolTip"
-						className={"material-symbols-rounded " + (index !== 0 ? "button" : "buttonNoClick")}
-						id="previous"
-						onClick={() => { props.newMove(prevMove.value) }}
-					>skip_previous</span>
-				</Link>
-				<ToolTip
-					id="previousToolTip"
-					text="Show Previous Move"
-					render={index !== 0}
-				/>
+						data-tip data-for="minusToolTip"
+						className={"material-symbols-rounded " + (props.currentFrame !== 1 && !props.playing ? "button" : "buttonNoClick")}
+						id="minus"
+						onClick={() => { props.currentFrame !== 1 && !props.playing ? props.setCurrentFrame(props.currentFrame - 1) : null }}
+					>chevron_left</span>
 
-				<span
-					data-tip data-for="minusToolTip"
-					className={"material-symbols-rounded " + (props.currentFrame !== 1 && !props.playing ? "button" : "buttonNoClick")}
-					id="minus"
-					onClick={() => { props.currentFrame !== 1 && !props.playing ? props.setCurrentFrame(props.currentFrame - 1) : null }}
-				>chevron_left</span>
+					<ToolTip
+						id="minusToolTip"
+						text="Go Back 1 Frame"
+						render={props.currentFrame !== 1 && !props.playing}
+					/>
 
-				<ToolTip
-					id="minusToolTip"
-					text="Go Back 1 Frame"
-					render={props.currentFrame !== 1 && !props.playing}
-				/>
-
-				<span
-					data-tip data-for="playToolTip"
-					className={"material-symbols-rounded " + (totalFrames !== 1 ? "button" : "buttonNoClick")}
-					id="pause-play"
-					onClick={() => {props.setPlaying(!props.playing)}}
-				>{props.playing ? "pause" : "play_arrow"}</span>
-				<ToolTip
-					id="playToolTip"
-					text={props.playing ? "Pause the Move" : "Play the Move"}
-					render={totalFrames !== 1}
-				/>
-
-				<span
-					data-tip data-for="plusToolTip"
-					className={"material-symbols-rounded " + (props.currentFrame !== totalFrames && !props.playing ? "button" : "buttonNoClick")}
-					id="plus"
-					onClick={() => { props.currentFrame !== totalFrames && !props.playing ? props.setCurrentFrame(props.currentFrame + 1) : null }}
-				>chevron_right</span>
-				<ToolTip
-					id="plusToolTip"
-					text="Go Forward 1 Frame"
-					render={props.currentFrame !== totalFrames && !props.playing}
-				/>
-
-				<Link to={nextMove !== undefined ? `/${props.currentCharacterData.value}/${nextMove.value}` : null}>
 					<span
-						data-tip data-for="nextToolTip"
-						className={"material-symbols-rounded " + (index !== props.currentCharacterData.moves.length - 1 ? "button" : "buttonNoClick")}
-						id="next"
-						onClick={() => { props.newMove(nextMove.value) }}
-					>skip_next</span>
-				</Link>
-				<ToolTip
-					id="nextToolTip"
-					text="Show Next Move"
-					render={index !== props.totalMoves - 1}
-				/>
+						data-tip data-for="playToolTip"
+						className={"material-symbols-rounded " + (totalFrames !== 1 ? "button" : "buttonNoClick")}
+						id="pause-play"
+						onClick={() => {props.setPlaying(!props.playing)}}
+					>{props.playing ? "pause" : "play_arrow"}</span>
+					<ToolTip
+						id="playToolTip"
+						text={props.playing ? "Pause the Move" : "Play the Move"}
+						render={totalFrames !== 1}
+					/>
 
-				<span
-					data-tip data-for="loopToolTip"
-					className={"material-symbols-rounded button" + (props.settings.loopMove ? " buttonActive" : "")}
-					id="loop"
-					onClick={() => {
-						let settings = JSON.parse(JSON.stringify(props.settings));
-						settings.loopMove = !settings.loopMove;
-						props.changeSettings(settings);
-					}}
-				>repeat</span>
-				<ToolTip
-					id="loopToolTip"
-					text={props.settings.loopMove ? "Looping Enabled" : "Looping Disabled"}
-					render={true}
-				/>
+					<span
+						data-tip data-for="plusToolTip"
+						className={"material-symbols-rounded " + (props.currentFrame !== totalFrames && !props.playing ? "button" : "buttonNoClick")}
+						id="plus"
+						onClick={() => { props.currentFrame !== totalFrames && !props.playing ? props.setCurrentFrame(props.currentFrame + 1) : null }}
+					>chevron_right</span>
+					<ToolTip
+						id="plusToolTip"
+						text="Go Forward 1 Frame"
+						render={props.currentFrame !== totalFrames && !props.playing}
+					/>
 
-				<SpeedOptions
-					setPlaySpeed={props.setPlaySpeed}
-					playSpeed={props.playSpeed}
-					totalFrames={totalFrames}
-				/>
+					<Link to={nextMove !== undefined ? `/${props.currentCharacterData.value}/${nextMove.value}` : null}>
+						<span
+							data-tip data-for="nextToolTip"
+							className={"material-symbols-rounded " + (index !== props.currentCharacterData.moves.length - 1 ? "button" : "buttonNoClick")}
+							id="next"
+							onClick={() => { props.newMove(nextMove.value) }}
+						>skip_next</span>
+					</Link>
+					<ToolTip
+						id="nextToolTip"
+						text="Show Next Move"
+						render={index !== props.totalMoves - 1}
+					/>
+				</div>
+
+				<div id="extraControls">
+					<span
+						data-tip data-for="loopToolTip"
+						className={"material-symbols-rounded button" + (props.settings.loopMove ? " buttonActive" : "")}
+						id="loop"
+						onClick={() => {
+							let settings = JSON.parse(JSON.stringify(props.settings));
+							settings.loopMove = !settings.loopMove;
+							props.changeSettings(settings);
+						}}
+					>repeat</span>
+					<ToolTip
+						id="loopToolTip"
+						text={props.settings.loopMove ? "Looping Enabled" : "Looping Disabled"}
+						render={true}
+					/>
+
+					<SpeedOptions
+						setPlaySpeed={props.setPlaySpeed}
+						playSpeed={props.playSpeed}
+						totalFrames={totalFrames}
+					/>
+				</div>
 
 			</div>
 		)

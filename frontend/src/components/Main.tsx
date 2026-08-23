@@ -197,16 +197,18 @@ function Main(props) {
               settings={props.settings}
               newMove={newMove}
             />
-            <span
-              id="share"
-              className="material-symbols-rounded"
-              data-tip
-              data-for="shareToolTip"
-              onClick={copyToClipboard}
-            >
-              share
-            </span>
-            <ToolTip id="shareToolTip" text="Copy the link to this move" render={true} />
+            <div id="shareWrapper">
+              <span
+                id="share"
+                className="material-symbols-rounded"
+                data-tip
+                data-for="shareToolTip"
+                onClick={copyToClipboard}
+              >
+                share
+              </span>
+              <ToolTip id="shareToolTip" text="Copy the link to this move" render={true} />
+            </div>
           </div>
         </div>
         <DataPortal
