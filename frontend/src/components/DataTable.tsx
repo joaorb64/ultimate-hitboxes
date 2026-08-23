@@ -1,7 +1,5 @@
 //Import React Elements
 import * as React from "react"
-import ReactTooltip from "react-tooltip";
-import touchTooltipProps from "../data/touchTooltipProps";
 
 //Import Components
 import HitboxTable from './HitboxTable'
@@ -85,24 +83,21 @@ function DataTable(props) {
           {props.type === "hitboxes" ? (
             <React.Fragment>
               {[
-                { key: "showAllHitboxData", chip: "Show All Hitboxes", label: "Show all hitboxes at all times" },
-                { key: "damageMultiplier", chip: "1v1 Multi", label: "Apply 1v1 damage multiplier" },
-                { key: "showExtraInfo", chip: "Extended Table", label: "Show extra hitbox info in the table" },
+                { key: "showAllHitboxData", chip: "Show All Hitboxes" },
+                { key: "damageMultiplier", chip: "1v1 Multi" },
+                { key: "showExtraInfo", chip: "Extended Table" },
               ].map(t => (
-                <React.Fragment key={t.key}>
-                  <span
-                    className={"tableSettingChip" + (props.settings[t.key] ? " active" : "")}
-                    data-tip data-for={`tableSetting-${t.key}`}
-                    onClick={() => {
-                      let settings = JSON.parse(JSON.stringify(props.settings));
-                      settings[t.key] = !settings[t.key];
-                      props.changeSettings(settings);
-                    }}
-                  >
-                    {t.chip}
-                  </span>
-                  <ReactTooltip id={`tableSetting-${t.key}`} place="top" effect="solid" {...touchTooltipProps}>{t.label}</ReactTooltip>
-                </React.Fragment>
+                <span
+                  key={t.key}
+                  className={"tableSettingChip" + (props.settings[t.key] ? " active" : "")}
+                  onClick={() => {
+                    let settings = JSON.parse(JSON.stringify(props.settings));
+                    settings[t.key] = !settings[t.key];
+                    props.changeSettings(settings);
+                  }}
+                >
+                  {t.chip}
+                </span>
               ))}
             </React.Fragment>
           ) : null}
