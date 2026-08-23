@@ -1,7 +1,11 @@
-//On touch devices there's no hover-out to dismiss a tooltip, so hover-triggered tooltips get stuck open.
-//Switch those devices to tap-to-open / tap-elsewhere-to-close instead of leaving tooltip content unreachable.
+//On touch devices, react-tooltip's default trigger fires on the first touch, which
+//either leaves tooltips stuck open (no hover-out to dismiss) or, worse, swallows a tap
+//that was meant for the trigger's own onClick. So on touch we disable the built-in
+//trigger entirely (pointing it at events that never fire) and let
+//longPressTooltipManager drive it manually via a long press instead, auto-dismissing
+//itself shortly after - the same interaction Material uses for plain tooltips.
 const isTouch = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(hover: none)").matches
 
-const touchTooltipProps = isTouch ? { event: "click", globalEventOff: "click" } : {}
+const touchTooltipProps = isTouch ? { event: "_longPressShow", eventOff: "_longPressHide" } : {}
 
 export default touchTooltipProps

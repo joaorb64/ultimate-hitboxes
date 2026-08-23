@@ -13,6 +13,13 @@ import touchTooltipProps from '../data/touchTooltipProps'
 import '../css/DataTable.css';
 
 function HitboxTable(props) {
+  //Rows mount/unmount as hitboxes get filtered in and out (e.g. toggling "Always Show All
+  //Hitboxes"), and react-tooltip only binds to the DOM nodes present when it last scanned -
+  //rebuild after every render so newly (re)mounted trigger elements stay hooked up
+  React.useEffect(() => {
+    ReactTooltip.rebuild()
+  })
+
   try {
     //Create an entry in the table for each hitbox
     let hitboxData = [];
