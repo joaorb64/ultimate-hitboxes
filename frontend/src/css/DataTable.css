@@ -22,6 +22,9 @@
 
 .tableSettingChip {
 	cursor: pointer;
+	user-select: none;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
 	padding: 4px 10px;
 	border-radius: 10px;
 	font-size: 11px;
@@ -134,6 +137,7 @@ span {
 	justify-content: center;
 	gap: 4px;
 	font-size: 1em;
+	-webkit-touch-callout: none;
 }
 
 .angleIndicator {
@@ -143,6 +147,9 @@ span {
 
 .tableheader {
 	cursor: pointer;
+	user-select: none;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
 	font-weight: 600;
 	font-size: .7em;
 	text-transform: uppercase;

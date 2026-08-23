@@ -57,6 +57,9 @@
 	font-weight: 600;
 	white-space: nowrap;
 	cursor: pointer;
+	user-select: none;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
 }
 
 #hitboxDetailBody td:last-child {

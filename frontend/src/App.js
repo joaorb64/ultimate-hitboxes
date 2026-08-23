@@ -161,8 +161,9 @@ class App extends React.Component {
   //Call components to render the page
   render() {
     ////This extends the background color to the whole screen
-    document.body.style.backgroundColor =
-      this.state.settings.dark_light === 0 ? "#111318" : "#F6F6F8";
+    let pageBg = this.state.settings.dark_light === 0 ? "#111318" : "#F6F6F8";
+    document.body.style.backgroundColor = pageBg;
+    document.documentElement.style.setProperty("--pageBg", pageBg);
 
     if (this.state.characterData === undefined) {
       return null;

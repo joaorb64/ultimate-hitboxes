@@ -137,7 +137,7 @@
         "variable": "facingrestrict",
         "name": "Facing Restrict",
         "toolTipID": "facingrestrict-ToolTip",
-        "toolTipDescription": "Determines launch direction of the opponent"
+        "toolTipDescription": "Controls how the hit's position affects launch direction. Some values (like 'f') always send the opponent toward the direction the attacker is facing, no matter where they're standing. Others depend on the opponent's position relative to the attacker, so hitting them from behind flips the knockback the other way - a 'reverse hit'"
     },
     "setweight":
     {

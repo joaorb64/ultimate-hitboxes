@@ -58,6 +58,9 @@ a {
 
 #chooseCharacterButton {
   cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
   display: inline-flex;
   align-items: center;
   gap: 6px;

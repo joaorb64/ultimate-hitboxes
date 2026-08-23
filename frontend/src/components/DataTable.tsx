@@ -83,8 +83,8 @@ function DataTable(props) {
           {props.type === "hitboxes" ? (
             <React.Fragment>
               {[
-                { key: "showAllHitboxData", chip: "Show All Hitboxes" },
-                { key: "damageMultiplier", chip: "1v1 Multi" },
+                { key: "showAllHitboxData", chip: "Always Show All Hitboxes" },
+                { key: "damageMultiplier", chip: "1v1 Damage Multi" },
                 { key: "showExtraInfo", chip: "Extended Table" },
               ].map(t => (
                 <span

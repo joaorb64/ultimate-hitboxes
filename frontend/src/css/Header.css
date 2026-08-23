@@ -51,6 +51,9 @@ h5 {
 	font-size: 30px;
 	border-radius: 50%;
 	transition: box-shadow .15s ease-in-out, background-color .15s ease-in-out;
+	user-select: none;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
 }
 
 .helpButtons:hover {
@@ -64,6 +67,7 @@ h5 {
 	height: 30px;
 	border-radius: 50%;
 	transition: box-shadow .15s ease-in-out, background-color .15s ease-in-out;
+	-webkit-touch-callout: none;
 }
 
 .linkButtons:hover {
