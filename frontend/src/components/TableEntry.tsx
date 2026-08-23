@@ -8,6 +8,7 @@ import AngleIndicator from './AngleIndicator'
 import isTouchDevice from '../data/isTouchDevice'
 import { showInfoModal } from '../data/infoModalController'
 import * as angleDescriptions from '../data/angleDescriptions.json'
+import * as facingRestrictDescriptions from '../data/facingRestrictDescriptions.json'
 import enumPrefixes from '../data/enumPrefixes'
 
 //CSS Imports
@@ -125,11 +126,37 @@ function TableEntry(props) {
       tdList.push(
         <td key={index} className={className}>
           <span
-            className={"angleCell" + (isSpecial ? " specialAngle" : "")}
+            className={"infoValueCell" + (isSpecial ? " specialAngle" : "")}
             {...touchProps}
           >
             {props.hitbox[field.variable]}&deg;
-            <AngleIndicator angle={props.hitbox[field.variable]} />
+            <span className="angleCompassWrapper">
+              <AngleIndicator angle={props.hitbox[field.variable]} />
+              {(isSpecial && isTouchDevice) ? <span className="material-symbols-rounded infoIndicator">info</span> : null}
+            </span>
+          </span>
+        </td>
+      )
+    }
+
+    //Facing Restrict values each mean something different (see facingRestrictDescriptions) -
+    //show that explanation the same way special angles do
+    else if (field.variable === "facingrestrict") {
+      let raw = props.hitbox[field.variable]
+      let prefix = enumPrefixes.facingrestrict
+      let value = typeof raw === "string" && raw.startsWith(prefix) ? raw.slice(prefix.length) : raw
+      let description = facingRestrictDescriptions[value]
+      let touchProps = (description && isTouchDevice) ? {
+        onClick: () => showInfoModal(`Facing Restrict: ${value}`, description)
+      } : {
+        "data-tip": description || undefined,
+        "data-for": description ? `facingRestrict-${value}` : undefined,
+      }
+      tdList.push(
+        <td key={index} className={className}>
+          <span className="infoValueCell" {...touchProps}>
+            {value === undefined || value === "" ? "-" : value}
+            {(description && isTouchDevice) ? <span className="material-symbols-rounded infoIndicatorInline">info</span> : null}
           </span>
         </td>
       )

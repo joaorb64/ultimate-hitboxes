@@ -7,6 +7,7 @@ import '../css/HitBoxDetail.css';
 
 //Import Data
 import * as hitboxFields from '../data/hitboxFields.json'
+import * as facingRestrictDescriptions from '../data/facingRestrictDescriptions.json'
 import isTouchDevice from '../data/isTouchDevice'
 import { showInfoModal } from '../data/infoModalController'
 import enumPrefixes from '../data/enumPrefixes'
@@ -49,6 +50,16 @@ function HitBoxDetail(props) {
         let labelProps = isTouchDevice
           ? { onClick: () => showInfoModal(fieldName, fieldDescription) }
           : { "data-tip": true, "data-for": pair[0] }
+
+        //Facing Restrict's value means something different depending on which value it is,
+        //so give the value itself its own explanation too, same as the main table
+        let valueDescription = pair[0] === "facingrestrict" ? facingRestrictDescriptions[String(value)] : undefined
+        let valueProps = valueDescription
+          ? (isTouchDevice
+              ? { onClick: () => showInfoModal(`Facing Restrict: ${value}`, valueDescription) }
+              : { "data-tip": true, "data-for": `facingRestrictDetail-${value}` })
+          : {}
+
         rows.push(
           <tr key={pair[0]}>
             <td {...labelProps}>
@@ -58,12 +69,17 @@ function HitBoxDetail(props) {
             <td>
               {isBool
                 ? <span className={"boolValue " + (value === "true" ? "boolTrue" : "boolFalse")}>{value}</span>
-                : String(value)}
+                : valueDescription
+                  ? <span className="infoValueCell" {...valueProps}>{String(value)}{isTouchDevice ? <span className="material-symbols-rounded infoIndicatorInline">info</span> : null}</span>
+                  : String(value)}
             </td>
           </tr>
         )
         if (!isTouchDevice) {
           infoToolTips.push(<ReactTooltip key={pair[0]} id={pair[0]} place="top" effect="solid">{fieldDescription}</ReactTooltip>)
+          if (valueDescription) {
+            infoToolTips.push(<ReactTooltip key={`facingRestrictDetail-${value}`} id={`facingRestrictDetail-${value}`} place="top" effect="solid">{valueDescription}</ReactTooltip>)
+          }
         }
       }
     })

@@ -1,0 +1,9 @@
+{
+  "f": "Always launches the opponent toward the direction the attacker is facing, no matter where they're standing relative to the attacker.",
+  "b": "Always launches the opponent away from the direction the attacker is facing - the opposite of 'f'.",
+  "lr": "Launch direction depends on the opponent's position relative to the attacker: hit from the front, they're launched forward; hit from behind, the knockback flips backward - a 'reverse hit'.",
+  "pos": "Launch direction depends on the opponent's position relative to the attacker: hit from the front, they're launched forward; hit from behind, the knockback flips backward - a 'reverse hit'.",
+  "part": "Launch direction depends on the position of the specific hitbox part relative to the opponent, rather than the attacker's position as a whole.",
+  "speed": "Launch direction follows the attacker's current movement instead of a fixed facing direction.",
+  "back_slash": "A special case used by a small number of moves with their own reverse-facing hit behavior (e.g. Shulk's Back Slash)."
+}

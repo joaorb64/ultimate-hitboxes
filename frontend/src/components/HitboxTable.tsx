@@ -7,6 +7,7 @@ import TableEntry from './TableEntry'
 
 //Data Imports
 import * as angleDescriptions from '../data/angleDescriptions.json'
+import * as facingRestrictDescriptions from '../data/facingRestrictDescriptions.json'
 import isTouchDevice from '../data/isTouchDevice'
 import { showInfoModal } from '../data/infoModalController'
 
@@ -64,9 +65,13 @@ function HitboxTable(props) {
     let tableClass = props.settings.dark_light === 0 ? "darkTable" : "lightTable";
     let headerClass = props.settings.dark_light === 0 ? "darkTable" : "lightTable";
 
-    //Static tooltips explaining each special (>360) angle, shared by every row showing that angle (desktop only - touch opens InfoModal instead, see TableEntry)
+    //Static tooltips explaining each special (>360) angle and each Facing Restrict value,
+    //shared by every row showing that value (desktop only - touch opens InfoModal instead, see TableEntry)
     let specialAngleTooltips = isTouchDevice ? [] : Object.entries(angleDescriptions).map(([angle, description]) => (
       <ReactTooltip key={`specialAngle-${angle}`} id={`specialAngle-${angle}`} place="top" effect="solid">{description}</ReactTooltip>
+    ))
+    let facingRestrictTooltips = isTouchDevice ? [] : Object.entries(facingRestrictDescriptions).map(([value, description]) => (
+      <ReactTooltip key={`facingRestrict-${value}`} id={`facingRestrict-${value}`} place="top" effect="solid">{description}</ReactTooltip>
     ))
 
     return (
@@ -83,6 +88,7 @@ function HitboxTable(props) {
         </table>
         {toolTipList}
         {specialAngleTooltips}
+        {facingRestrictTooltips}
       </div>
     )
   }

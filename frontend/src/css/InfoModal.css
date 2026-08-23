@@ -45,9 +45,22 @@
 	text-align: left;
 }
 
+/* Positioned out of normal flow so it doesn't push or re-center the text it's labeling -
+   the parent trigger element needs position:relative for this to anchor correctly */
 .infoIndicator {
-	font-size: 13px !important;
-	vertical-align: middle;
+	position: absolute;
+	top: 2px;
+	right: 0;
+	font-size: 12px !important;
 	opacity: .55;
-	margin-left: 2px;
+	pointer-events: none;
+}
+
+/* For short values (a single letter, a number) there's no room for a corner badge without
+   overlapping the value itself, so this variant just sits inline after it instead */
+.infoIndicatorInline {
+	position: static;
+	font-size: 12px !important;
+	opacity: .55;
+	pointer-events: none;
 }

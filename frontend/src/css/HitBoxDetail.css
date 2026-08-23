@@ -54,6 +54,7 @@
 }
 
 #hitboxDetailBody td:first-child {
+	position: relative;
 	font-weight: 600;
 	white-space: nowrap;
 	cursor: pointer;

@@ -131,7 +131,8 @@ span {
 	font-size: .6em;
 }
 
-.angleCell {
+.infoValueCell {
+	position: relative;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -140,12 +141,18 @@ span {
 	-webkit-touch-callout: none;
 }
 
+.angleCompassWrapper {
+	position: relative;
+	display: inline-flex;
+}
+
 .angleIndicator {
 	flex-shrink: 0;
 	opacity: .8;
 }
 
 .tableheader {
+	position: relative;
 	cursor: pointer;
 	user-select: none;
 	-webkit-user-select: none;
