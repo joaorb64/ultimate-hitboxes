@@ -51,9 +51,12 @@ jobs:
       - name: Build
         working-directory: frontend
         run: npm run build
-      - name: Skip Jekyll processing
+      - name: Add SPA GitHub Pages 404 fallback
         working-directory: frontend
-        run: touch dist/.nojekyll
+        # Lives at frontend/404.html rather than frontend/public/404.html because the asset
+        # checkout steps above wipe frontend/public before this runs, taking any file placed
+        # there with it.
+        run: cp 404.html dist/404.html && touch dist/.nojekyll
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
