@@ -1,13 +1,15 @@
 //React Imports
 import * as React from "react"
 import ReactTooltip from "react-tooltip";
-import touchTooltipProps from "../data/touchTooltipProps";
 
 //CSS Imports
 import '../css/HitBoxDetail.css';
 
 //Import Data
 import * as hitboxFields from '../data/hitboxFields.json'
+import isTouchDevice from '../data/isTouchDevice'
+import { showInfoModal } from '../data/infoModalController'
+import enumPrefixes from '../data/enumPrefixes'
 
 function HitBoxDetail(props) {
 
@@ -38,10 +40,21 @@ function HitBoxDetail(props) {
         if (pair[0] === "clang_rebound") {
           value = value === "attack_setoff_kind_on" ? "true" : value === "attack_setoff_kind_off" ? "false" : value
         }
+        else if (enumPrefixes[pair[0]] !== undefined && typeof value === "string" && value.startsWith(enumPrefixes[pair[0]])) {
+          value = value.slice(enumPrefixes[pair[0]].length)
+        }
         let isBool = value === "true" || value === "false"
+        let fieldName = hitboxFields[pair[0]] ? hitboxFields[pair[0]]["name"] : pair[0]
+        let fieldDescription = hitboxFields[pair[0]] ? hitboxFields[pair[0]]["toolTipDescription"] : ""
+        let labelProps = isTouchDevice
+          ? { onClick: () => showInfoModal(fieldName, fieldDescription) }
+          : { "data-tip": true, "data-for": pair[0] }
         rows.push(
           <tr key={pair[0]}>
-            <td data-tip data-for={pair[0]}>{hitboxFields[pair[0]] ? hitboxFields[pair[0]]["name"] : pair[0]}</td>
+            <td {...labelProps}>
+              {fieldName}
+              {isTouchDevice ? <span className="material-symbols-rounded infoIndicator">info</span> : null}
+            </td>
             <td>
               {isBool
                 ? <span className={"boolValue " + (value === "true" ? "boolTrue" : "boolFalse")}>{value}</span>
@@ -49,7 +62,9 @@ function HitBoxDetail(props) {
             </td>
           </tr>
         )
-        infoToolTips.push(<ReactTooltip key={pair[0]} id={pair[0]} place="top" effect="solid" {...touchTooltipProps}>{hitboxFields[pair[0]] ? hitboxFields[pair[0]]["toolTipDescription"] : ""}</ReactTooltip>)
+        if (!isTouchDevice) {
+          infoToolTips.push(<ReactTooltip key={pair[0]} id={pair[0]} place="top" effect="solid">{fieldDescription}</ReactTooltip>)
+        }
       }
     })
 

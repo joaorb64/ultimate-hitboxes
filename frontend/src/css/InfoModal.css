@@ -1,0 +1,53 @@
+#infoModalBackdrop {
+	position: fixed;
+	inset: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 50;
+	padding: 24px;
+	box-sizing: border-box;
+}
+
+#infoModal {
+	max-width: 320px;
+	width: 100%;
+	border-radius: 24px;
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+#infoModalHeader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	margin-bottom: 10px;
+}
+
+#infoModalHeader h4 {
+	margin: 0;
+	font-size: 16px;
+}
+
+#infoModalClose {
+	cursor: pointer;
+	font-size: 22px;
+	flex-shrink: 0;
+}
+
+#infoModalBody {
+	font-size: 14px;
+	line-height: 1.5;
+	opacity: .85;
+	text-align: left;
+}
+
+.infoIndicator {
+	font-size: 13px !important;
+	vertical-align: middle;
+	opacity: .55;
+	margin-left: 2px;
+}

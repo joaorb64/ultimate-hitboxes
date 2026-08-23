@@ -4,6 +4,12 @@ import * as React from "react"
 //Component Imports
 import AngleIndicator from './AngleIndicator'
 
+//Data Imports
+import isTouchDevice from '../data/isTouchDevice'
+import { showInfoModal } from '../data/infoModalController'
+import * as angleDescriptions from '../data/angleDescriptions.json'
+import enumPrefixes from '../data/enumPrefixes'
+
 //CSS Imports
 import '../css/DataTable.css'
 
@@ -40,16 +46,6 @@ function condenseFrames(arr) {
   else
     result += start + "-" + end;
   return result;
-}
-
-const enumPrefixes = {
-  effect: "collision_attr_",
-  type: "attack_region_",
-  collisionpart: "collision_part_mask_",
-  sfxlevel: "attack_sound_level_",
-  sfxtype: "collision_sound_attr_",
-  hitbits: "collision_category_mask_",
-  facingrestrict: "attack_lr_check_",
 }
 
 function boolCell(key, className, value) {
@@ -120,12 +116,17 @@ function TableEntry(props) {
     else if (field.variable === "angle") {
       let numAngle = parseFloat(props.hitbox[field.variable])
       let isSpecial = numAngle > 360
+      let touchProps = (isSpecial && isTouchDevice) ? {
+        onClick: () => showInfoModal(`${props.hitbox[field.variable]}° Angle`, angleDescriptions[numAngle])
+      } : {
+        "data-tip": isSpecial || undefined,
+        "data-for": isSpecial ? `specialAngle-${numAngle}` : undefined,
+      }
       tdList.push(
         <td key={index} className={className}>
           <span
             className={"angleCell" + (isSpecial ? " specialAngle" : "")}
-            data-tip={isSpecial || undefined}
-            data-for={isSpecial ? `specialAngle-${numAngle}` : undefined}
+            {...touchProps}
           >
             {props.hitbox[field.variable]}&deg;
             <AngleIndicator angle={props.hitbox[field.variable]} />

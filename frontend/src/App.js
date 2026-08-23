@@ -21,6 +21,7 @@ import CharacterList from "./components/CharacterList";
 import Main from "./components/Main";
 import CookiePopup from "./components/CookiePopup";
 import Cookies from "./components/Cookies";
+import InfoModal from "./components/InfoModal";
 import { getCharacterList } from "./data/staticData";
 
 const basename = window.location.hostname.endsWith("github.io")
@@ -176,6 +177,7 @@ class App extends React.Component {
           }
         >
           <ReactNotifications />
+          <InfoModal dark_light={this.state.settings.dark_light} />
           <Router basename={basename}>
             <Header
               settings={this.state.settings}

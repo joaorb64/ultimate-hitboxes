@@ -7,7 +7,8 @@ import TableEntry from './TableEntry'
 
 //Data Imports
 import * as angleDescriptions from '../data/angleDescriptions.json'
-import touchTooltipProps from '../data/touchTooltipProps'
+import isTouchDevice from '../data/isTouchDevice'
+import { showInfoModal } from '../data/infoModalController'
 
 //CSS Imports
 import '../css/DataTable.css';
@@ -39,21 +40,33 @@ function HitboxTable(props) {
       )
     })
 
-    //Create a header and a tooltip for each column in the table
+    //Create a header and a tooltip for each column in the table. On touch, headers open
+    //InfoModal on tap instead of using a hover-style tooltip, with a small icon showing
+    //there's more info to see
     let thList = []
     let toolTipList = []
     let className = (props.settings.dark_light === 0 ? "darkTable" : "lightTable") + " tableheader"
     props.fields.forEach(function (field, index) {
-      thList.push(<th key={index} className={className} data-tip data-for={field.toolTipID}>{field.name}</th>)
-      toolTipList.push(<ReactTooltip key={index} id={field.toolTipID} place="top" effect="solid" {...touchTooltipProps}>{field.toolTipDescription}</ReactTooltip>)
+      if (isTouchDevice) {
+        thList.push(
+          <th key={index} className={className} onClick={() => showInfoModal(field.name, field.toolTipDescription)}>
+            {field.name}
+            <span className="material-symbols-rounded infoIndicator">info</span>
+          </th>
+        )
+      }
+      else {
+        thList.push(<th key={index} className={className} data-tip data-for={field.toolTipID}>{field.name}</th>)
+        toolTipList.push(<ReactTooltip key={index} id={field.toolTipID} place="top" effect="solid">{field.toolTipDescription}</ReactTooltip>)
+      }
     })
 
     let tableClass = props.settings.dark_light === 0 ? "darkTable" : "lightTable";
     let headerClass = props.settings.dark_light === 0 ? "darkTable" : "lightTable";
 
-    //Static tooltips explaining each special (>360) angle, shared by every row showing that angle
-    let specialAngleTooltips = Object.entries(angleDescriptions).map(([angle, description]) => (
-      <ReactTooltip key={`specialAngle-${angle}`} id={`specialAngle-${angle}`} place="top" effect="solid" {...touchTooltipProps}>{description}</ReactTooltip>
+    //Static tooltips explaining each special (>360) angle, shared by every row showing that angle (desktop only - touch opens InfoModal instead, see TableEntry)
+    let specialAngleTooltips = isTouchDevice ? [] : Object.entries(angleDescriptions).map(([angle, description]) => (
+      <ReactTooltip key={`specialAngle-${angle}`} id={`specialAngle-${angle}`} place="top" effect="solid">{description}</ReactTooltip>
     ))
 
     return (
