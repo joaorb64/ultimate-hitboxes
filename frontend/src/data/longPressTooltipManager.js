@@ -4,9 +4,14 @@ import ReactTooltip from "react-tooltip"
 //their own shortly after, without needing a second tap to dismiss.
 const LONG_PRESS_MS = 450
 const AUTO_HIDE_MS = 2000
+//A real finger never holds perfectly still - a few pixels of drift is normal and shouldn't
+//be treated as "the user is scrolling/dragging, cancel the long press"
+const MOVE_CANCEL_THRESHOLD = 12
 
 let pressTimer = null
 let hideTimer = null
+let startX = 0
+let startY = 0
 let initialized = false
 
 function clearPressTimer() {
@@ -34,6 +39,9 @@ export function initLongPressTooltips() {
 		if (!trigger) {
 			return
 		}
+		const touch = e.touches[0]
+		startX = touch.clientX
+		startY = touch.clientY
 		pressTimer = setTimeout(() => {
 			ReactTooltip.show(trigger)
 			if (hideTimer) {
@@ -45,6 +53,16 @@ export function initLongPressTooltips() {
 		}, LONG_PRESS_MS)
 	}, { passive: true })
 
-	document.addEventListener("touchmove", clearPressTimer, { passive: true })
+	document.addEventListener("touchmove", (e) => {
+		if (!pressTimer) {
+			return
+		}
+		const touch = e.touches[0]
+		if (Math.abs(touch.clientX - startX) > MOVE_CANCEL_THRESHOLD || Math.abs(touch.clientY - startY) > MOVE_CANCEL_THRESHOLD) {
+			clearPressTimer()
+		}
+	}, { passive: true })
+
 	document.addEventListener("touchend", clearPressTimer, { passive: true })
+	document.addEventListener("touchcancel", clearPressTimer, { passive: true })
 }
