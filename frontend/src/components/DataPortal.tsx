@@ -56,6 +56,39 @@ function DataPortal(props) {
     setHitboxData(data)
   }
 
+  //Keyboard shortcuts for desktop: space to play/pause, left/right arrows to step frames -
+  //mirrors the same enabled/disabled rules as the on-screen buttons
+  useEffect(() => {
+    function handleKeyDown(e) {
+      //Don't hijack typing in the move search box or anywhere else text is entered
+      if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") {
+        return;
+      }
+
+      if (e.code === "Space") {
+        if (props.currentMoveData.frames !== 1) {
+          e.preventDefault();
+          props.setPlaying(!props.playing);
+        }
+      }
+      else if (e.code === "ArrowLeft") {
+        if (props.currentFrame !== 1 && !props.playing) {
+          e.preventDefault();
+          props.setCurrentFrame(props.currentFrame - 1);
+        }
+      }
+      else if (e.code === "ArrowRight") {
+        if (props.currentFrame !== props.currentMoveData.frames && !props.playing) {
+          e.preventDefault();
+          props.setCurrentFrame(props.currentFrame + 1);
+        }
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [props.currentFrame, props.playing, props.currentMoveData.frames]);
+
   useInterval(() => {
     if (props.settings.loopMove || props.currentFrame < props.currentMoveData.frames) {
       props.setCurrentFrame(props.currentFrame >= props.currentMoveData.frames ? 1 : props.currentFrame + 1)
