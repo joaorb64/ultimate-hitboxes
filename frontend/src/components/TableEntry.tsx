@@ -132,8 +132,8 @@ function TableEntry(props) {
             {props.hitbox[field.variable]}&deg;
             <span className="angleCompassWrapper">
               <AngleIndicator angle={props.hitbox[field.variable]} />
-              {(isSpecial && isTouchDevice) ? <span className="material-symbols-rounded infoIndicator">info</span> : null}
             </span>
+            {(isSpecial && isTouchDevice) ? <span className="material-symbols-rounded infoIndicatorInline">info</span> : null}
           </span>
         </td>
       )

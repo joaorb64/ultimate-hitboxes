@@ -104,11 +104,7 @@ function DataPortal(props) {
               setCurrentFrame={props.setCurrentFrame}
               playing={props.playing}
               setPlaying={props.setPlaying}
-              currentCharacterData={props.currentCharacterData}
               currentMoveData={props.currentMoveData}
-              setCharacter={props.setCharacter}
-              newMove={props.newMove}
-              totalMoves={props.totalMoves}
               settings={props.settings}
               changeSettings={props.changeSettings}
               playSpeed={playSpeed}

@@ -1,41 +1,15 @@
-/* The transport controls (prev/back/play/forward/next) are the visually primary
-   element - they should sit at the row's true center regardless of the loop toggle
-   and speed selector next to them, so give them a dedicated centered grid column
-   with a mirrored empty column on the other side instead of just flex-centering
-   everything together (which shifts the transport controls off-center) */
 #buttons {
-	display: grid;
-	grid-template-columns: 1fr auto 1fr;
-	align-items: center;
-	gap: 10px;
+	display: flex;
+	justify-content: center;
 	margin-top: 14px;
 }
 
 #transportControls {
-	grid-column: 2;
 	display: flex;
 	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
 	gap: 10px;
-}
-
-#extraControls {
-	grid-column: 3;
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	justify-self: start;
-}
-
-@media (max-width: 700px) {
-	#buttons {
-		display: flex;
-		flex-direction: column;
-	}
-
-	#transportControls, #extraControls {
-		justify-content: center;
-		flex-wrap: wrap;
-	}
 }
 
 .button {

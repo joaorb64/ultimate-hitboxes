@@ -11,7 +11,22 @@ import '../css/DataTable.css';
 import * as hitboxFields from '../data/hitboxFields.json'
 
 function DataTable(props) {
-  
+
+  //On mobile, the setting chips collapse behind a cog icon that opens a modal instead
+  const [settingsOpen, setSettingsOpen] = React.useState(false)
+
+  let settingChips = [
+    { key: "showAllHitboxData", chip: "Always Show All Hitboxes" },
+    { key: "damageMultiplier", chip: "1v1 Damage Multi" },
+    { key: "showExtraInfo", chip: "Extended Table" },
+  ]
+
+  let toggleSetting = function (key) {
+    let settings = JSON.parse(JSON.stringify(props.settings));
+    settings[key] = !settings[key];
+    props.changeSettings(settings);
+  }
+
   //Base data for each type of table entry
   let hp = { "variable": "hp", "name": "HP", "toolTipID": "hpToolTip", "toolTipDescription": "How much damage the hurtbox can withstand (Super Armor Only)" }
   let hurtboxType = { "variable": "type", "name": "Type", "toolTipID": "typeToolTip", "toolTipDescription": "Intangible, Invincible, or Super Armor" }
@@ -82,26 +97,58 @@ function DataTable(props) {
           <h5>{tableTitle}</h5>
           {props.type === "hitboxes" ? (
             <React.Fragment>
-              {[
-                { key: "showAllHitboxData", chip: "Always Show All Hitboxes" },
-                { key: "damageMultiplier", chip: "1v1 Damage Multi" },
-                { key: "showExtraInfo", chip: "Extended Table" },
-              ].map(t => (
-                <span
-                  key={t.key}
-                  className={"tableSettingChip" + (props.settings[t.key] ? " active" : "")}
-                  onClick={() => {
-                    let settings = JSON.parse(JSON.stringify(props.settings));
-                    settings[t.key] = !settings[t.key];
-                    props.changeSettings(settings);
-                  }}
-                >
-                  {t.chip}
-                </span>
-              ))}
+              <span
+                id="tableSettingsCog"
+                className="material-symbols-rounded"
+                onClick={() => setSettingsOpen(true)}
+              >
+                settings
+              </span>
+              <div id="tableSettingChips">
+                {settingChips.map(t => (
+                  <span
+                    key={t.key}
+                    className={"tableSettingChip" + (props.settings[t.key] ? " active" : "")}
+                    onClick={() => toggleSetting(t.key)}
+                  >
+                    {t.chip}
+                  </span>
+                ))}
+              </div>
             </React.Fragment>
           ) : null}
         </div>
+        {props.type === "hitboxes" && settingsOpen ? (
+          <div id="tableSettingsModalBackdrop" onClick={() => setSettingsOpen(false)}>
+            <div
+              id="tableSettingsModal"
+              className={props.settings.dark_light === 0 ? "darkSettingsPanel" : "lightSettingsPanel"}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div id="tableSettingsModalHeader">
+                <h4>Table Settings</h4>
+                <span
+                  className="material-symbols-rounded"
+                  id="tableSettingsModalClose"
+                  onClick={() => setSettingsOpen(false)}
+                >
+                  close
+                </span>
+              </div>
+              <div id="tableSettingsModalBody">
+                {settingChips.map(t => (
+                  <span
+                    key={t.key}
+                    className={"tableSettingChip" + (props.settings[t.key] ? " active" : "")}
+                    onClick={() => toggleSetting(t.key)}
+                  >
+                    {t.chip}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : null}
         <HitboxTable
           type={props.type}
           portalState={props.portalState}

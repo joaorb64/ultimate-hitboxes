@@ -29,6 +29,23 @@ a {
   color-scheme: dark;
 }
 
+#toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #6366F1;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  z-index: 60;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
 .info.homeIntro {
   font-size: .6em;
   opacity: .7;
@@ -82,34 +99,51 @@ a {
   font-size: 18px;
 }
 
-/* The dropdown is the visually primary element - it should sit at the row's true
-   center regardless of the share button next to it, so give it a dedicated centered
-   grid column with a mirrored empty column on the other side instead of just
-   flex-centering the pair (which shifts the dropdown off-center by the share button's width) */
+/* The dropdown is the visually primary element and should be free to grow into
+   whatever room the previous/next move buttons around it leave, so give it the
+   flexible column instead of an auto one sized to its own content */
 #moveSelectionRow {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 14px;
+  gap: 8px;
+}
+
+#previousMoveLink {
+  grid-column: 1;
 }
 
 #moveSelectionRow > #moveSearchContainer {
   grid-column: 2;
 }
 
-#shareWrapper {
+#nextMoveLink {
   grid-column: 3;
-  justify-self: start;
 }
 
-#characterChoiceBar #share {
+.moveNavButton, .moveNavButtonNoClick {
   cursor: pointer;
   font-size: 24px;
+  border-radius: 50%;
+  padding: 4px;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  transition: background-color .15s ease-in-out, opacity .15s ease-in-out;
+}
+
+.moveNavButton {
   opacity: .75;
 }
 
-#characterChoiceBar #share:hover {
+.moveNavButton:hover {
   opacity: 1;
+  background-color: rgba(127, 127, 127, 0.15);
+}
+
+.moveNavButtonNoClick {
+  cursor: default;
+  opacity: .2;
 }
 
 #main {

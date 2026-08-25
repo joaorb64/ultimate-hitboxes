@@ -7,10 +7,6 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import "react-notifications-component/dist/theme.css";
-import { ReactNotifications } from "react-notifications-component";
-import { store } from "react-notifications-component";
-
 //Import css
 import "./css/App.css";
 
@@ -56,6 +52,10 @@ class App extends React.Component {
       },
 
       cookieMessage: true,
+
+      //Simple toast shown briefly after an action like copying a share link
+      toastMessage: "",
+      toastVisible: false,
     };
 
     //Bind functions so they are usable within components
@@ -145,18 +145,11 @@ class App extends React.Component {
   }
 
   urlNotification() {
-    console.log("url");
-    store.addNotification({
-      message: "URL saved to clipboard",
-      type: "success",
-      container: "top-center",
-      animationIn: ["animate__animated", "animate__fadeIn"],
-      animationOut: ["animate__animated", "animate__fadeOut"],
-      dismiss: {
-        duration: 3000,
-        onScreen: true,
-      },
-    });
+    clearTimeout(this.toastTimeout);
+    this.setState({ toastMessage: "URL copied to clipboard", toastVisible: true });
+    this.toastTimeout = setTimeout(() => {
+      this.setState({ toastVisible: false });
+    }, 2000);
   }
 
   //Call components to render the page
@@ -176,7 +169,9 @@ class App extends React.Component {
             this.state.settings.dark_light === 0 ? "app-light" : "app-dark"
           }
         >
-          <ReactNotifications />
+          <div id="toast" className={this.state.toastVisible ? "fadeIn" : "fadeOut"}>
+            {this.state.toastMessage}
+          </div>
           <InfoModal dark_light={this.state.settings.dark_light} />
           <Router basename={basename}>
             <Header

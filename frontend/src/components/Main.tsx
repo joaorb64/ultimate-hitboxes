@@ -11,12 +11,6 @@ import MoveDropDown from "./MoveDropDown";
 import ToolTip from "./ToolTip";
 import { getCharacterData, getMoveData } from "../data/staticData";
 
-const shareOrigin =
-  window.location.origin +
-  (window.location.hostname.endsWith("github.io")
-    ? `/${window.location.pathname.split("/").filter(Boolean)[0] || ""}`
-    : "");
-
 //CSS Imports
 import "../css/Player.css";
 
@@ -44,18 +38,6 @@ function Main(props) {
     setPlaying(false);
     setMove(move);
     setCurrentFrame(1);
-  };
-
-  let copyToClipboard = function () {
-    const el = document.createElement("textarea");
-    el.value = playing
-      ? `${shareOrigin}/${character}/${move}`
-      : `${shareOrigin}/${character}/${move}/${currentFrame}`;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand("copy");
-    document.body.removeChild(el);
-    props.urlNotification();
   };
 
   //Determine which character is the current character, save the data and the index
@@ -186,29 +168,63 @@ function Main(props) {
       />
     );
   } else if (!loading && currentMoveData.value !== undefined) {
+    //Establish the index of the move within the move list, and the previous/next
+    //selectable moves (some moves aren't selectable yet, skip over those)
+    let moveIndex = currentCharacterData.moves.findIndex(
+      (moveOption) => moveOption.value === currentMoveData.value,
+    );
+
+    let prevMove = undefined;
+    let downIncrement = 1;
+    while (prevMove === undefined && moveIndex - downIncrement >= 0) {
+      if (currentCharacterData.moves[moveIndex - downIncrement].complete !== false) {
+        prevMove = currentCharacterData.moves[moveIndex - downIncrement];
+      } else {
+        downIncrement += 1;
+      }
+    }
+
+    let nextMove = undefined;
+    let upIncrement = 1;
+    while (nextMove === undefined && moveIndex + upIncrement < currentCharacterData.moves.length) {
+      if (currentCharacterData.moves[moveIndex + upIncrement].complete !== false) {
+        nextMove = currentCharacterData.moves[moveIndex + upIncrement];
+      } else {
+        upIncrement += 1;
+      }
+    }
+
     return (
       <div>
         <div id="characterChoiceBar">
           <h2 id="currentCharacterName">{currentCharacterData.name}</h2>
           <div id="moveSelectionRow">
+            <Link id="previousMoveLink" to={prevMove !== undefined ? `/${currentCharacterData.value}/${prevMove.value}` : null}>
+              <span
+                data-tip data-for="previousMoveToolTip"
+                className={"material-symbols-rounded " + (prevMove !== undefined ? "moveNavButton" : "moveNavButtonNoClick")}
+                id="previousMove"
+                onClick={() => { prevMove !== undefined && newMove(prevMove.value) }}
+              >skip_previous</span>
+            </Link>
+            <ToolTip id="previousMoveToolTip" text="Show Previous Move" render={prevMove !== undefined} />
+
             <MoveDropDown
               currentCharacterData={currentCharacterData}
               currentMoveData={currentMoveData}
               settings={props.settings}
               newMove={newMove}
             />
-            <div id="shareWrapper">
+
+            <Link id="nextMoveLink" to={nextMove !== undefined ? `/${currentCharacterData.value}/${nextMove.value}` : null}>
               <span
-                id="share"
-                className="material-symbols-rounded"
-                data-tip
-                data-for="shareToolTip"
-                onClick={copyToClipboard}
-              >
-                share
-              </span>
-              <ToolTip id="shareToolTip" text="Copy the link to this move" render={true} />
-            </div>
+                data-tip data-for="nextMoveToolTip"
+                className={"material-symbols-rounded " + (nextMove !== undefined ? "moveNavButton" : "moveNavButtonNoClick")}
+                id="nextMove"
+                onClick={() => { nextMove !== undefined && newMove(nextMove.value) }}
+              >skip_next</span>
+            </Link>
+            <ToolTip id="nextMoveToolTip" text="Show Next Move" render={nextMove !== undefined} />
           </div>
         </div>
         <DataPortal
