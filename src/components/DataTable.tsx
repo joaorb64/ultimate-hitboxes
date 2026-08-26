@@ -1,0 +1,173 @@
+//Import React Elements
+import * as React from "react"
+
+//Import Components
+import HitboxTable from './HitboxTable'
+
+//Import CSS
+import '../css/DataTable.css';
+
+//Import Data
+import hitboxFields from '../data/hitboxFields.json'
+
+function DataTable(props) {
+
+  //On mobile, the setting chips collapse behind a cog icon that opens a modal instead
+  const [settingsOpen, setSettingsOpen] = React.useState(false)
+
+  let settingChips = [
+    { key: "showAllHitboxData", chip: "Always Show All Hitboxes" },
+    { key: "damageMultiplier", chip: "1v1 Damage Multi" },
+    { key: "showExtraInfo", chip: "Extended Table" },
+  ]
+
+  let toggleSetting = function (key) {
+    let settings = JSON.parse(JSON.stringify(props.settings));
+    settings[key] = !settings[key];
+    props.changeSettings(settings);
+  }
+
+  //Base data for each type of table entry
+  let hp = { "variable": "hp", "name": "HP", "toolTipID": "hpToolTip", "toolTipDescription": "How much damage the hurtbox can withstand (Super Armor Only)" }
+  let hurtboxType = { "variable": "type", "name": "Type", "toolTipID": "typeToolTip", "toolTipDescription": "Intangible, Invincible, or Super Armor" }
+
+  //Data for which table entries should be displayed during certain table configurations
+  let fields = {
+    grabsBasicNoFrame: [hitboxFields["id"], hitboxFields["size"], hitboxFields["ground_or_air"], hitboxFields["notes"], hitboxFields["more"]],
+    grabsBasic: [hitboxFields["id"], hitboxFields["frames"], hitboxFields["size"], hitboxFields["ground_or_air"], hitboxFields["notes"], hitboxFields["more"]],
+    grabsExtra: [hitboxFields["id"], hitboxFields["frames"], hitboxFields["size"], hitboxFields["ground_or_air"], hitboxFields["bone"], hitboxFields["x"], hitboxFields["y"], hitboxFields["z"], hitboxFields["notes"], hitboxFields["more"]],
+    grabsExtraNoFrame: [hitboxFields["id"], hitboxFields["size"], hitboxFields["ground_or_air"], hitboxFields["bone"], hitboxFields["x"], hitboxFields["y"], hitboxFields["z"], hitboxFields["notes"], hitboxFields["more"]],
+    hitboxesBasicNoFrame: [hitboxFields["id"],hitboxFields["damage"], hitboxFields["shielddamage"], hitboxFields["angle"], hitboxFields["bkb"], hitboxFields["kbg"], hitboxFields["fkb"], hitboxFields["trip"], hitboxFields["sdi"], hitboxFields["ground_or_air"], hitboxFields["size"], hitboxFields["notes"], hitboxFields["more"]],
+    hitboxesExtraNoFrame: [hitboxFields["id"], hitboxFields["part"],hitboxFields["damage"], hitboxFields["shielddamage"], hitboxFields["angle"], hitboxFields["bkb"], hitboxFields["kbg"], hitboxFields["fkb"], hitboxFields["trip"], hitboxFields["sdi"], hitboxFields["hitlag"], hitboxFields["ground_or_air"], hitboxFields["size"], hitboxFields["rehit"], hitboxFields["bone"], hitboxFields["x"], hitboxFields["y"], hitboxFields["z"], hitboxFields["setweight"], hitboxFields["clang_rebound"], hitboxFields["disablehitlag"], hitboxFields["reflectable"], hitboxFields["absorbable"], hitboxFields["flinchless"], hitboxFields["facingrestrict"], hitboxFields["direct_hitbox"], hitboxFields["friendlyfire"], hitboxFields["effect"], hitboxFields["type"], hitboxFields["hitbits"], hitboxFields["collisionpart"], hitboxFields["sfxlevel"], hitboxFields["sfxtype"], hitboxFields["notes"], hitboxFields["more"]],
+    hitboxesBasic: [hitboxFields["id"], hitboxFields["frames"],hitboxFields["damage"], hitboxFields["shielddamage"], hitboxFields["angle"], hitboxFields["bkb"], hitboxFields["kbg"], hitboxFields["fkb"], hitboxFields["trip"], hitboxFields["sdi"], hitboxFields["ground_or_air"], hitboxFields["size"], hitboxFields["notes"], hitboxFields["more"]],
+    hitboxesExtra: [hitboxFields["id"], hitboxFields["part"], hitboxFields["frames"],hitboxFields["damage"], hitboxFields["shielddamage"], hitboxFields["angle"], hitboxFields["bkb"], hitboxFields["kbg"], hitboxFields["fkb"], hitboxFields["trip"], hitboxFields["sdi"], hitboxFields["hitlag"], hitboxFields["ground_or_air"], hitboxFields["size"], hitboxFields["rehit"], hitboxFields["bone"], hitboxFields["x"], hitboxFields["y"], hitboxFields["z"], hitboxFields["setweight"], hitboxFields["clang_rebound"], hitboxFields["disablehitlag"], hitboxFields["reflectable"], hitboxFields["absorbable"], hitboxFields["flinchless"], hitboxFields["facingrestrict"], hitboxFields["direct_hitbox"], hitboxFields["friendlyfire"], hitboxFields["effect"], hitboxFields["type"], hitboxFields["hitbits"], hitboxFields["collisionpart"], hitboxFields["sfxlevel"], hitboxFields["sfxtype"], hitboxFields["notes"], hitboxFields["more"]],
+    hurtboxesBasic: [hitboxFields["frames"], hurtboxType, hitboxFields["bone"], hp, hitboxFields["notes"]],
+    throwsBasic: [hitboxFields["id"], hitboxFields["frames"],hitboxFields["damage"], hitboxFields["angle"], hitboxFields["bkb"], hitboxFields["kbg"], hitboxFields["fkb"], hitboxFields["notes"], hitboxFields["more"]],
+    throwsExtra: [hitboxFields["id"], hitboxFields["frames"],hitboxFields["damage"], hitboxFields["angle"], hitboxFields["bkb"], hitboxFields["kbg"], hitboxFields["fkb"], hitboxFields["notes"], hitboxFields["more"]],
+    throwsBasicNoFrame: [hitboxFields["id"],hitboxFields["damage"], hitboxFields["angle"], hitboxFields["bkb"], hitboxFields["kbg"], hitboxFields["fkb"], hitboxFields["notes"], hitboxFields["more"]],
+    throwsExtraNoFrame: [hitboxFields["id"],hitboxFields["damage"], hitboxFields["angle"], hitboxFields["bkb"], hitboxFields["kbg"], hitboxFields["fkb"], hitboxFields["notes"], hitboxFields["more"]],
+    hurtboxesExtra: [hitboxFields["frames"], hurtboxType, hitboxFields["bone"], hp, hitboxFields["notes"],],
+    hurtboxesExtraNoFrame: [hurtboxType, hitboxFields["bone"], hp, hitboxFields["notes"]]
+  }
+
+  //Establish data tible name
+  let tableTitle;
+  if (props.type === "hitboxes") {
+    tableTitle = "Hitbox Data"
+  }
+  else if (props.type === "grabs") {
+    tableTitle = "Grab Data"
+  }
+  else if (props.type === "throws") {
+    tableTitle = "Throw Data"
+  }
+  else if (props.type === "hurtboxes") {
+    tableTitle = "Hurtbox Data"
+  }
+
+  //Only render when needed
+  let type = ""
+  if (props.loading) {
+    return null
+  }
+  else {
+    let extraInfo = props.settings.showExtraInfo ? "Extra" : "Basic";
+    let showFrames = props.move[props.type][0].frames.length === 0 ? "NoFrame" : "";
+    type = props.type + extraInfo + showFrames
+    //Choose table headers
+    let table = fields[type];
+    //Remove notes column if all note entries are empty
+    if (props.move[props.type].every(entry => entry.notes === "")) {
+      table = table.filter(element => element.variable !== "notes");
+    }
+
+    //Split notes into separate lines if it has \n
+    let notes = [];
+    let jsxNotes = []
+    if (props.move.notes !== undefined) {
+      notes = props.move.notes.split("\n");
+      jsxNotes = notes.map(text => <p>{text}</p>)
+    }
+
+    //Render data
+    return (
+      <div id="dataTable">
+
+        <div id="dataTableHeader">
+          <h5>{tableTitle}</h5>
+          {props.type === "hitboxes" ? (
+            <React.Fragment>
+              <span
+                id="tableSettingsCog"
+                className="material-symbols-rounded"
+                onClick={() => setSettingsOpen(true)}
+              >
+                settings
+              </span>
+              <div id="tableSettingChips">
+                {settingChips.map(t => (
+                  <span
+                    key={t.key}
+                    className={"tableSettingChip" + (props.settings[t.key] ? " active" : "")}
+                    onClick={() => toggleSetting(t.key)}
+                  >
+                    {t.chip}
+                  </span>
+                ))}
+              </div>
+            </React.Fragment>
+          ) : null}
+        </div>
+        {props.type === "hitboxes" && settingsOpen ? (
+          <div id="tableSettingsModalBackdrop" onClick={() => setSettingsOpen(false)}>
+            <div
+              id="tableSettingsModal"
+              className={props.settings.dark_light === 0 ? "darkSettingsPanel" : "lightSettingsPanel"}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div id="tableSettingsModalHeader">
+                <h4>Table Settings</h4>
+                <span
+                  className="material-symbols-rounded"
+                  id="tableSettingsModalClose"
+                  onClick={() => setSettingsOpen(false)}
+                >
+                  close
+                </span>
+              </div>
+              <div id="tableSettingsModalBody">
+                {settingChips.map(t => (
+                  <span
+                    key={t.key}
+                    className={"tableSettingChip" + (props.settings[t.key] ? " active" : "")}
+                    onClick={() => toggleSetting(t.key)}
+                  >
+                    {t.chip}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : null}
+        <HitboxTable
+          type={props.type}
+          portalState={props.portalState}
+          move={props.move}
+          hitboxes={props.move[props.type]}
+          currentFrame={props.currentFrame}
+          setCurrentFrame={props.setCurrentFrame}
+          updateHitboxData={props.updateHitboxData}
+          jumpToFrame={props.jumpToFrame}
+          fields={table}
+          settings={props.settings}
+          key={type}
+        />
+        <div id="moveNotes">
+          {jsxNotes === undefined || props.type === "hurtboxes" ? null : jsxNotes}
+        </div>
+      </div>
+    )
+  }
+}
+
+export default DataTable

@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+      "jsx": "react",
+      "resolveJsonModule": true,
+      "noImplicitAny": false
+    },
+    "include": [
+      "src",
+      "index.d.ts",
+      "src/components/*.tsx"
+    ]
+}
